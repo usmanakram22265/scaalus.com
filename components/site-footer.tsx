@@ -72,13 +72,15 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized wordmark in solid Navy, sitting on the very bottom edge. */}
-      <p
+      {/* Oversized wordmark, cropped at the baseline and fading out. */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none mt-space-sm select-none pb-[0.03em] text-center font-display text-[clamp(4.75rem,24vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-navy md:mt-space-md"
+        className="pointer-events-none mt-space-md h-[clamp(3.25rem,15vw,12.5rem)] select-none overflow-hidden [mask-image:linear-gradient(180deg,#000_30%,transparent)] md:mt-space-lg"
       >
-        {site.name.toLowerCase()}
-      </p>
+        <p className="text-center font-display text-[clamp(5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-[#0D2947]/[0.06]">
+          {site.name.toLowerCase()}
+        </p>
+      </div>
     </footer>
   );
 }
