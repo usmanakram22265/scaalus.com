@@ -8,15 +8,17 @@ import { Icon } from "./ui/icons";
 import { Logo } from "./ui/logo";
 
 /**
- * Floating pill header. Always opaque: a Royal → Navy sweep (continued in the
- * hero gradient) while a navy panel sits under it, white elsewhere, switched
- * instantly so it never blends. A dot slides under the section you're reading,
- * and a 2px bar along the bottom edge shows scroll progress (transform only).
+ * At the top the header has no surface: it sits on the hero's Navy band as
+ * part of the hero. Once you scroll, a frosted semi-translucent pill fades and
+ * settles in behind it (opacity/transform only), tinted Navy over dark panels
+ * and white over light ones. A dot slides under the section you're reading,
+ * and a hairline along the bottom edge shows scroll progress.
  */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [overDark, setOverDark] = useState(true);
   const [active, setActive] = useState(-1);
+  const [scrolled, setScrolled] = useState(false);
   const navEl = useRef<HTMLElement>(null);
   const dot = useRef<HTMLSpanElement>(null);
   const header = useRef<HTMLElement>(null);
@@ -35,6 +37,7 @@ export function SiteHeader() {
     let frame = 0;
     const update = () => {
       frame = 0;
+      setScrolled(window.scrollY > 16);
       const pill = header.current?.firstElementChild as HTMLElement | null;
       const line = (pill?.getBoundingClientRect().bottom ?? 0) - 1;
       setOverDark(
@@ -132,6 +135,7 @@ export function SiteHeader() {
   };
 
   const dark = overDark && !open;
+  const raised = scrolled || open;
 
   return (
     <header
@@ -139,11 +143,23 @@ export function SiteHeader() {
       data-tone={dark ? "dark" : "light"}
       className="fixed inset-x-0 top-0 z-floating px-3 pt-[calc(env(safe-area-inset-top)+var(--header-gap))] sm:px-5"
     >
-      <div
-        className={`relative mx-auto flex h-header max-w-page items-center justify-between gap-3 overflow-hidden rounded-full pl-4 pr-1.5 lg:h-[3.75rem] lg:pl-6 lg:pr-2 ${
-          dark ? "nav-dark" : "nav-light"
-        }`}
-      >
+      <div className="relative isolate mx-auto flex h-header max-w-page items-center justify-between gap-3 rounded-full pl-4 pr-1.5 lg:h-[3.75rem] lg:pl-6 lg:pr-2">
+        {/* The pill surface: invisible at the top, frosted once scrolled. */}
+        <span
+          aria-hidden="true"
+          className={`nav-glass pointer-events-none absolute inset-0 -z-10 rounded-full transition-[opacity,transform] ease-out ${
+            raised
+              ? "scale-100 opacity-100 duration-500"
+              : "scale-x-[1.035] scale-y-[1.12] opacity-0 duration-300"
+          }`}
+        >
+          <span
+            className={`nav-glass-dark absolute inset-0 rounded-full transition-opacity duration-300 ease-out ${dark ? "opacity-100" : "opacity-0"}`}
+          />
+          <span
+            className={`nav-glass-light absolute inset-0 rounded-full transition-opacity duration-300 ease-out ${dark ? "opacity-0" : "opacity-100"}`}
+          />
+        </span>
         <Link
           href="#top"
           onClick={closeForNavigation}
@@ -263,7 +279,7 @@ export function SiteHeader() {
         {/* Scroll progress along the pill's bottom edge. */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-8 bottom-0 h-px overflow-hidden rounded-full"
+          className={`pointer-events-none absolute inset-x-8 bottom-0 h-px overflow-hidden rounded-full transition-opacity duration-300 ease-out ${raised ? "opacity-100" : "opacity-0"}`}
         >
           <span
             ref={progress}
