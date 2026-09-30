@@ -13,7 +13,7 @@ export function DoneForYou() {
     <section
       id="included"
       aria-labelledby="included-title"
-      className="pb-section"
+      className="py-section"
     >
       <div className="container-page">
         <SectionHeader

@@ -208,6 +208,24 @@
       0 14px 36px -14px rgb(13 40 71 / 0.22);
   }
 
+  /* Soft Light Blue wash: a cool light band between the warm ones. */
+  .panel-mist {
+    position: relative;
+    isolation: isolate;
+    background-color: #eef2fc;
+    background-image:
+      radial-gradient(
+        60% 50% at 15% 0%,
+        rgb(110 147 240 / 0.22),
+        transparent 70%
+      ),
+      radial-gradient(
+        50% 45% at 90% 100%,
+        rgb(43 89 216 / 0.1),
+        transparent 70%
+      );
+  }
+
   /* Warm grain on stone bands so light surfaces aren't flat either. */
   .panel-stone {
     position: relative;

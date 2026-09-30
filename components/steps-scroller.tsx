@@ -217,7 +217,7 @@ export function StepsScroller() {
       <div className="hidden lg:block">
         <div
           aria-hidden="true"
-          className="panel-stone sticky top-[calc(50vh-13rem)] grid h-[26rem] overflow-hidden rounded-panel p-8"
+          className="panel-stone sticky top-[calc(50vh-13rem)] grid h-[26rem] overflow-hidden rounded-panel p-8 shadow-on-navy"
         >
           <span className="absolute left-7 top-6 font-mono text-label uppercase text-ink-muted">
             {String(active + 1).padStart(2, "0")} /{" "}
@@ -240,11 +240,11 @@ export function StepsScroller() {
       <ol ref={list} className="relative grid gap-5 lg:gap-0">
         <span
           aria-hidden="true"
-          className="absolute bottom-0 left-[1.375rem] top-0 hidden w-[2px] overflow-hidden rounded-full bg-navy/10 lg:block"
+          className="absolute bottom-0 left-[1.375rem] top-0 hidden w-[2px] overflow-hidden rounded-full bg-white/10 lg:block"
         >
           <span
             ref={fill}
-            className="block h-full w-full origin-top rounded-full bg-brand"
+            className="block h-full w-full origin-top rounded-full bg-gradient-to-b from-sky/40 to-sky"
             style={{ transform: "scaleY(0)" }}
           />
         </span>
@@ -260,8 +260,8 @@ export function StepsScroller() {
               <span
                 className={`absolute left-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full font-mono text-[0.8125rem] font-medium transition-transform duration-300 ease-out lg:grid ${
                   on
-                    ? "scale-100 bg-brand text-white shadow-cta"
-                    : "scale-90 bg-surface-elevated text-ink-muted shadow-elevated"
+                    ? "scale-100 bg-sky text-navy shadow-[0_8px_22px_-8px_rgb(110_147_240/0.8)]"
+                    : "scale-90 bg-navy text-white/70 ring-1 ring-inset ring-white/15"
                 }`}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -277,10 +277,12 @@ export function StepsScroller() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="mt-4 text-[clamp(1.375rem,1.2rem+0.8vw,1.75rem)] font-semibold leading-tight tracking-[-0.03em]">
+                <h3 className="mt-4 text-[clamp(1.375rem,1.2rem+0.8vw,1.75rem)] font-semibold leading-tight tracking-[-0.03em] text-navy lg:text-white">
                   {item.title}
                 </h3>
-                <p className="mt-2 max-w-[28rem] text-ink-muted">{item.body}</p>
+                <p className="mt-2 max-w-[28rem] text-ink-muted lg:text-white/70">
+                  {item.body}
+                </p>
               </div>
               {/* Inline visual (mobile/tablet) */}
               <div

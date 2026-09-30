@@ -212,43 +212,45 @@ export function Outcomes() {
     <section
       id="results"
       aria-labelledby="results-title"
-      className="pb-section pt-space-xl"
+      className="px-2 pt-section sm:px-3"
     >
-      <div className="container-page">
-        <SectionHeader
-          id="results"
-          eyebrow={results.eyebrow}
-          title={results.title}
-          highlight={results.highlight}
-        />
-        <ul className="mt-space-xl grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {results.items.map((item, i) => {
-            const Visual = visuals[i] ?? PhoneVisual;
-            return (
-              <li
-                key={item.title}
-                data-reveal=""
-                data-spotlight=""
-                style={{ "--i": i % 3 } as CSSProperties}
-                className={`card lift overflow-hidden p-2 ${spans[i]}`}
-              >
-                <span aria-hidden="true" className="spotlight" />
-                <div
-                  aria-hidden="true"
-                  className={`relative grid h-44 place-items-center overflow-hidden rounded-[1.1rem] p-5 ${
-                    darkTiles.has(i) ? "panel-navy" : "panel-stone"
-                  }`}
+      <div className="panel-mist mx-auto max-w-[90rem] rounded-[2rem] py-section lg:rounded-panel">
+        <div className="container-page">
+          <SectionHeader
+            id="results"
+            eyebrow={results.eyebrow}
+            title={results.title}
+            highlight={results.highlight}
+          />
+          <ul className="mt-space-xl grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {results.items.map((item, i) => {
+              const Visual = visuals[i] ?? PhoneVisual;
+              return (
+                <li
+                  key={item.title}
+                  data-reveal=""
+                  data-spotlight=""
+                  style={{ "--i": i % 3 } as CSSProperties}
+                  className={`card lift overflow-hidden p-2 ${spans[i]}`}
                 >
-                  <Visual />
-                </div>
-                <div className="relative px-4 pb-4 pt-5">
-                  <h3 className="text-title">{item.title}</h3>
-                  <p className="mt-1.5 text-ink-muted">{item.body}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                  <span aria-hidden="true" className="spotlight" />
+                  <div
+                    aria-hidden="true"
+                    className={`relative grid h-44 place-items-center overflow-hidden rounded-[1.1rem] p-5 ${
+                      darkTiles.has(i) ? "panel-navy" : "panel-stone"
+                    }`}
+                  >
+                    <Visual />
+                  </div>
+                  <div className="relative px-4 pb-4 pt-5">
+                    <h3 className="text-title">{item.title}</h3>
+                    <p className="mt-1.5 text-ink-muted">{item.body}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

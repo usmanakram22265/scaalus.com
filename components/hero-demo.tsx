@@ -297,7 +297,7 @@ export function HeroDemo() {
 
         {/* Calendar */}
         <div
-          className="scene-in absolute -bottom-10 -right-1 w-[62%] sm:-right-10 sm:w-[58%]"
+          className="scene-in absolute -right-1 top-[calc(100%-2.75rem)] w-[62%] sm:-right-10 sm:w-[58%]"
           style={{ "--i": 1 } as CSSProperties}
         >
           <div className="rounded-[1.25rem] bg-surface-elevated p-3.5 shadow-floating">
@@ -375,7 +375,7 @@ export function HeroDemo() {
         </div>
       </div>
 
-      <div className="mt-16 flex items-center justify-center gap-3 sm:mt-20">
+      <div className="mt-[9.5rem] flex items-center justify-center gap-3 sm:mt-[10rem]">
         <span className="font-mono text-label uppercase text-white/50">
           {demo.label}
         </span>
