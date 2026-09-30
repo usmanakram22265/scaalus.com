@@ -17,14 +17,14 @@ export function Pricing() {
         data-tone="dark"
         data-header-dark=""
         data-loop=""
-        className="panel-navy mx-auto max-w-[90rem] rounded-[2rem] py-section lg:rounded-panel lg:py-[4.5rem]"
+        className="panel-navy mx-auto max-w-[90rem] rounded-[2rem] py-section lg:flex lg:min-h-[min(calc(100svh-6rem),58rem)] lg:items-center lg:rounded-panel lg:py-space-2xl"
       >
         {/*
           Phones: heading, price card, comparison (stacked).
           Desktop: heading + comparison on the left, price card on the right,
           so the whole section fits in one screen.
         */}
-        <div className="container-page grid gap-space-lg lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:gap-x-space-2xl lg:gap-y-space-lg">
+        <div className="container-page grid gap-space-lg lg:grid-cols-[minmax(0,1fr)_minmax(0,29rem)] lg:gap-x-space-2xl lg:gap-y-space-xl">
           <SectionHeader
             id="pricing"
             eyebrow={pricing.eyebrow}
@@ -41,7 +41,7 @@ export function Pricing() {
             data-reveal="scale"
             className="beam mx-auto w-full max-w-[28rem] self-center rounded-[1.75rem] shadow-on-navy lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mx-0"
           >
-            <div className="relative overflow-hidden rounded-[calc(1.75rem-1px)] bg-navy p-6 sm:p-7">
+            <div className="relative overflow-hidden rounded-[calc(1.75rem-1px)] bg-navy p-6 sm:p-8">
               <GrowthBars
                 className="absolute bottom-0 right-6 h-40 w-32 opacity-60"
                 fill="linear-gradient(180deg, rgb(110 147 240 / 0.18), rgb(110 147 240 / 0))"
@@ -58,7 +58,7 @@ export function Pricing() {
                   {plan.period}
                 </span>
               </p>
-              <ul className="mt-5 space-y-2.5">
+              <ul className="mt-6 space-y-3">
                 {plan.features.map((feature, i) => (
                   <li
                     key={feature}
@@ -72,7 +72,7 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <ButtonLink href="#trial" size="lg" arrow className="mt-7 w-full">
+              <ButtonLink href="#trial" size="lg" arrow className="mt-8 w-full">
                 {plan.cta}
               </ButtonLink>
             </div>
