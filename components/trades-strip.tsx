@@ -12,7 +12,7 @@ function Row({ hidden }: { hidden?: boolean }) {
           key={trade}
           className="flex items-center gap-2.5 whitespace-nowrap rounded-full bg-surface-elevated py-2.5 pl-3 pr-5 font-display text-[1.0625rem] font-medium tracking-[-0.02em] text-navy shadow-elevated"
         >
-          <span className="grid h-7 w-7 place-items-center rounded-full bg-surface-card text-brand">
+          <span className="grid h-7 w-7 place-items-center rounded-full bg-surface-card text-royal">
             <Icon name={tradeIcons[trade]} size={15} strokeWidth={2} />
           </span>
           {trade}

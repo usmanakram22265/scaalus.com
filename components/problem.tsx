@@ -9,12 +9,12 @@ function Visual({ index }: { index: number }) {
     // A phone that rings and nobody picks up.
     return (
       <span className="relative grid h-full w-full place-items-center">
-        <span className="ripple loop absolute h-14 w-14 rounded-full bg-brand/20" />
+        <span className="ripple loop absolute h-14 w-14 rounded-full bg-royal/20" />
         <span
-          className="ripple loop absolute h-14 w-14 rounded-full bg-brand/15"
+          className="ripple loop absolute h-14 w-14 rounded-full bg-royal/15"
           style={{ animationDelay: "1.4s" }}
         />
-        <span className="loop relative grid h-14 w-14 place-items-center rounded-full bg-brand text-white shadow-cta ring">
+        <span className="loop bg-deep-grad relative grid h-14 w-14 place-items-center rounded-full text-white shadow-cta ring">
           <Icon name="phoneMissed" size={24} strokeWidth={2} />
         </span>
       </span>
@@ -24,7 +24,7 @@ function Visual({ index }: { index: number }) {
     // Time running on while the lead waits.
     return (
       <span className="relative grid h-full w-full place-items-center">
-        <span className="relative h-16 w-16 rounded-full bg-surface-elevated shadow-elevated ring-4 ring-brand/10">
+        <span className="relative h-16 w-16 rounded-full bg-surface-elevated shadow-elevated ring-4 ring-royal/10">
           {[0, 90, 180, 270].map((deg) => (
             <span
               key={deg}
@@ -38,7 +38,7 @@ function Visual({ index }: { index: number }) {
             <span className="absolute -left-[1px] bottom-0 block h-5 w-[2px] rounded-full bg-navy" />
           </span>
           <span className="spin-fast loop absolute left-1/2 top-1/2 h-0 w-0">
-            <span className="absolute -left-[1px] bottom-0 block h-6 w-[2px] rounded-full bg-brand" />
+            <span className="bg-deep-grad absolute -left-[1px] bottom-0 block h-6 w-[2px] rounded-full" />
           </span>
           <span className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-navy" />
         </span>
@@ -63,7 +63,7 @@ function Visual({ index }: { index: number }) {
             <span className="absolute inset-x-2 top-3 block h-1 rounded-full bg-navy/15" />
             <span className="absolute left-2 top-5 block h-1 w-5 rounded-full bg-navy/10" />
             {i === 0 ? (
-              <span className="absolute bottom-2 left-2 grid h-5 w-5 place-items-center rounded-full bg-brand text-white">
+              <span className="bg-deep-grad absolute bottom-2 left-2 grid h-5 w-5 place-items-center rounded-full text-white">
                 <Icon name="dollar" size={11} strokeWidth={2.5} />
               </span>
             ) : null}

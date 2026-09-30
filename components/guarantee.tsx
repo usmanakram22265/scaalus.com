@@ -7,7 +7,7 @@ import { Eyebrow } from "./ui/section";
 /** Risk reversal, right after the price. */
 export function Guarantee() {
   return (
-    <section aria-labelledby="guarantee-title" className="py-section">
+    <section aria-labelledby="guarantee-title" className="cv-auto py-section">
       <div className="container-page">
         <div
           data-reveal=""

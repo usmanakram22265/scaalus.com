@@ -9,7 +9,7 @@ export function DoneForYou() {
     <section
       id="included"
       aria-labelledby="included-title"
-      className="pb-section"
+      className="cv-auto pb-section"
     >
       <div className="container-page">
         <SectionHeader
@@ -41,7 +41,7 @@ export function DoneForYou() {
                       name="check"
                       size={12}
                       strokeWidth={2.75}
-                      className="text-brand"
+                      className="text-royal"
                     />
                     {item}
                   </li>

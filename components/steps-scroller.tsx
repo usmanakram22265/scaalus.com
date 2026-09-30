@@ -29,7 +29,7 @@ function CaptureVisual({ active }: { active: boolean }) {
             {...piece(active, i)}
             className={`${piece(active, i).className} flex items-center gap-2 rounded-full bg-surface-elevated py-2 pl-2 pr-4 text-[0.875rem] font-semibold text-navy shadow-elevated`}
           >
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-surface-card text-brand">
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-surface-card text-royal">
               <Icon name={icons[i] ?? "inbox"} size={14} strokeWidth={2} />
             </span>
             {source}
@@ -38,7 +38,7 @@ function CaptureVisual({ active }: { active: boolean }) {
       </div>
       <span
         {...piece(active, 4)}
-        className={`${piece(active, 4).className} text-brand`}
+        className={`${piece(active, 4).className} text-royal`}
       >
         <Icon name="chevronDown" size={22} strokeWidth={2} />
       </span>
@@ -58,7 +58,7 @@ function ReplyVisual({ active }: { active: boolean }) {
     <div className="flex h-full flex-col justify-center gap-3 px-2">
       <p
         {...piece(active, 0)}
-        className={`${piece(active, 0).className} ml-auto max-w-[85%] rounded-[1.25rem] rounded-br-md bg-brand px-4 py-2.5 text-[0.9375rem] leading-snug text-white shadow-cta`}
+        className={`${piece(active, 0).className} bg-deep-grad ml-auto max-w-[85%] rounded-[1.25rem] rounded-br-md px-4 py-2.5 text-[0.9375rem] leading-snug text-white shadow-cta`}
       >
         {v.reply}
       </p>
@@ -88,7 +88,7 @@ function FollowUpVisual({ active }: { active: boolean }) {
             name="repeat"
             size={15}
             strokeWidth={2}
-            className="shrink-0 text-brand"
+            className="shrink-0 text-royal"
           />
           {text}
         </p>
@@ -128,7 +128,7 @@ function BookedVisual({ active }: { active: boolean }) {
               >
                 {hit ? (
                   <span
-                    className={`absolute inset-0 grid place-items-center rounded-lg bg-brand text-white shadow-cta transition-[opacity,transform] ease-out ${
+                    className={`bg-deep-grad absolute inset-0 grid place-items-center rounded-lg text-white shadow-cta transition-[opacity,transform] ease-out ${
                       active
                         ? "scale-100 opacity-100 delay-500 duration-500"
                         : "scale-75 opacity-0 duration-200"
@@ -244,7 +244,7 @@ export function StepsScroller() {
         >
           <span
             ref={fill}
-            className="block h-full w-full origin-top rounded-full bg-brand"
+            className="block h-full w-full origin-top rounded-full bg-[linear-gradient(180deg,#123499,#2B59D8)]"
             style={{ transform: "scaleY(0)" }}
           />
         </span>
@@ -260,7 +260,7 @@ export function StepsScroller() {
               <span
                 className={`absolute left-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full font-mono text-[0.8125rem] font-medium transition-transform duration-300 ease-out lg:grid ${
                   on
-                    ? "scale-100 bg-brand text-white shadow-cta"
+                    ? "bg-deep-grad scale-100 text-white shadow-cta"
                     : "scale-90 bg-surface-elevated text-ink-muted shadow-elevated"
                 }`}
               >

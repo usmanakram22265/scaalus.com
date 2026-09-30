@@ -7,12 +7,12 @@ import { TrialForm } from "./trial-form";
 /** Navy moment #3: the close, with the form right there. */
 export function FinalCta() {
   return (
-    <div className="px-2 sm:px-3">
+    <div className="cv-auto px-2 sm:px-3">
       <section
         id="trial"
         aria-labelledby="trial-title"
         data-tone="dark"
-        data-header-dark=""
+
         className="panel-navy mx-auto max-w-[90rem] rounded-[2rem] py-section lg:rounded-panel"
       >
         <div className="container-page grid items-center gap-space-xl lg:grid-cols-[1fr_1.05fr] lg:gap-space-2xl">

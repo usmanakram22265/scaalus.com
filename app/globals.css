@@ -105,7 +105,7 @@
 
   /* Mono eyebrow with the three-bar glyph from the logo mark. */
   .label {
-    @apply inline-flex items-center gap-2 font-mono text-label uppercase text-brand;
+    @apply inline-flex items-center gap-2 font-mono text-label uppercase text-royal;
   }
   [data-tone="dark"] .label {
     color: #6e93f0;
@@ -119,19 +119,25 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background-color: #0d2847;
+    /* Midnight base; navy, deep and royal layered in for depth, a faint Light Blue glow. */
+    background-color: #0d1726;
     background-image:
       radial-gradient(
-        60% 55% at 85% 0%,
-        rgb(110 147 240 / 0.28),
+        50% 45% at 82% 8%,
+        rgb(110 147 240 / 0.14),
         transparent 70%
       ),
       radial-gradient(
-        55% 60% at 0% 100%,
-        rgb(18 52 153 / 0.55),
+        45% 55% at 72% 55%,
+        rgb(18 52 153 / 0.38),
         transparent 72%
       ),
-      radial-gradient(90% 80% at 50% 50%, #0a2472 0%, transparent 80%);
+      radial-gradient(
+        55% 60% at 0% 100%,
+        rgb(10 36 114 / 0.55),
+        transparent 72%
+      ),
+      linear-gradient(160deg, #0d2847 0%, #0d1726 60%);
     color: #fff;
   }
   .panel-navy::before {
@@ -196,12 +202,25 @@
   }
 
   .icon-chip {
-    @apply grid h-11 w-11 shrink-0 place-items-center rounded-2xl text-white;
-    background-image: linear-gradient(145deg, #6e93f0 -10%, #2b59d8 55%);
+    @apply grid h-11 w-11 shrink-0 place-items-center rounded-2xl;
+    color: #6e93f0;
+    background-image: linear-gradient(150deg, #13294d, #0d1726);
     box-shadow:
-      0 6px 16px -6px rgb(43 89 216 / 0.6),
-      inset 0 1px 0 rgb(255 255 255 / 0.25);
+      0 6px 16px -6px rgb(13 23 38 / 0.5),
+      inset 0 1px 0 rgb(255 255 255 / 0.12);
   }
+
+  /* Deep blue fill for buttons, booked blocks and active states (Royal → Deep). */
+  .bg-deep-grad {
+    background-color: #0a2472;
+    background-image: linear-gradient(165deg, #123499 0%, #0a2472 100%);
+  }
+}
+
+/* Below-the-fold sections skip layout and paint until they're near the screen. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
 }
 
 /* ---------- Motion ---------- */

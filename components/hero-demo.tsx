@@ -149,7 +149,7 @@ function Beat({
   const typing = state === "typing";
   const bubble =
     side === "right"
-      ? "ml-auto rounded-br-md bg-brand/15 text-brand"
+      ? "ml-auto rounded-br-md bg-royal/10 text-royal"
       : "rounded-bl-md bg-surface-card text-ink-muted";
   return (
     <div className="grid">
@@ -192,7 +192,7 @@ function Bubble({
       <p
         className={`max-w-[84%] rounded-[1.15rem] px-3.5 py-2 text-[0.875rem] leading-snug ${
           business
-            ? "rounded-br-md bg-brand text-white"
+            ? "bg-deep-grad rounded-br-md text-white"
             : "rounded-bl-md bg-surface-card text-navy"
         }`}
       >
@@ -287,7 +287,7 @@ export function HeroDemo() {
                 replied ? "scale-100 opacity-100" : "scale-95 opacity-0"
               }`}
             >
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-brand text-white">
+              <span className="bg-deep-grad grid h-6 w-6 place-items-center rounded-full text-white">
                 <Icon name="zap" size={13} strokeWidth={2.25} />
               </span>
               {demo.chip}
@@ -305,7 +305,7 @@ export function HeroDemo() {
               <p className="font-display text-[0.9375rem] font-semibold tracking-[-0.02em] text-navy">
                 {demo.day}
               </p>
-              <span className="text-brand">
+              <span className="text-royal">
                 <Icon name="calendarCheck" size={16} />
               </span>
             </div>
@@ -323,7 +323,7 @@ export function HeroDemo() {
                     {demo.open}
                   </span>
                   <span
-                    className={`col-start-1 row-start-1 flex items-center justify-between gap-1.5 rounded-lg bg-brand px-2.5 py-1.5 text-[0.75rem] font-semibold text-white shadow-cta transition-[opacity,transform] ease-out ${
+                    className={`bg-deep-grad col-start-1 row-start-1 flex items-center justify-between gap-1.5 rounded-lg px-2.5 py-1.5 text-[0.75rem] font-semibold text-white shadow-cta transition-[opacity,transform] ease-out ${
                       booked
                         ? "scale-100 opacity-100 duration-500"
                         : "scale-[0.94] opacity-0 duration-200"
@@ -360,7 +360,7 @@ export function HeroDemo() {
                 : "-translate-y-3 scale-95 opacity-0 duration-200"
             }`}
           >
-            <span className="grid h-8 w-8 place-items-center rounded-xl bg-brand text-white shadow-cta">
+            <span className="bg-deep-grad grid h-8 w-8 place-items-center rounded-xl text-white shadow-cta">
               <Icon name="calendarCheck" size={16} strokeWidth={2} />
             </span>
             <span className="text-left">
