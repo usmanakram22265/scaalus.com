@@ -8,11 +8,12 @@ export function Faq() {
       id="faq"
       eyebrow={faq.eyebrow}
       title={faq.title}
+      highlight={faq.highlight}
       className="bg-surface-card"
     >
       <div
         data-reveal=""
-        className="mx-auto max-w-[46rem] rounded-card bg-surface-elevated px-space-md shadow-elevated sm:px-8"
+        className="mx-auto max-w-[46rem] rounded-card bg-surface-elevated px-space-md shadow-card ring-1 ring-inset ring-navy/[0.08] sm:px-8"
       >
         {faq.items.map((item) => (
           <details

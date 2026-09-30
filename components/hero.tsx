@@ -2,6 +2,7 @@ import { hero } from "@/lib/content";
 import { stagger } from "@/lib/style";
 import { HeroDemo } from "./hero-demo";
 import { ButtonLink } from "./ui/button";
+import { Glow } from "./ui/glow";
 import { Icon } from "./ui/icons";
 
 export function Hero() {
@@ -9,8 +10,12 @@ export function Hero() {
     <section
       id="top"
       aria-labelledby="hero-title"
-      className="grain bg-atmosphere relative pt-[calc(var(--header-h)+env(safe-area-inset-top))]"
+      className="relative isolate overflow-hidden bg-surface-base pt-[calc(var(--header-h)+env(safe-area-inset-top))]"
     >
+      <div aria-hidden="true" className="decor-layer">
+        <div className="dot-grid" />
+        <Glow size={640} color="rgb(110 147 240 / 0.35)" position="top-end" />
+      </div>
       <div className="container-page pb-section pt-space-xl lg:pt-space-2xl">
         <div className="mx-auto max-w-[56rem] text-center">
           <p
@@ -81,9 +86,10 @@ export function Hero() {
         </div>
 
         <div
-          className="animate-rise mt-space-xl lg:mt-space-2xl"
+          className="animate-rise relative isolate mt-space-xl lg:mt-space-2xl"
           style={stagger(6)}
         >
+          <Glow size={480} color="rgb(43 89 216 / 0.18)" position="center" />
           <HeroDemo />
         </div>
       </div>

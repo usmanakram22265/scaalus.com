@@ -107,6 +107,76 @@
   }
 }
 
+@layer components {
+  /* Eyebrow as a pill. Negative block margin cancels the padding so layout height is unchanged. */
+  .eyebrow-pill {
+    display: block;
+    inline-size: fit-content;
+    margin-inline: auto;
+    margin-block: -6px;
+    padding-block: 6px;
+    padding-inline: 12px;
+    border-radius: 9999px;
+    background-color: rgb(43 89 216 / 0.1);
+  }
+  [data-tone="dark"] .eyebrow-pill {
+    background-color: rgb(255 255 255 / 0.1);
+  }
+
+  /* Decorative layer that fills and clips to its section. */
+  .decor-layer {
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  /* Soft radial glow: set --glow-size and --glow-color inline. */
+  .glow {
+    position: absolute;
+    z-index: -1;
+    inline-size: var(--glow-size);
+    block-size: var(--glow-size);
+    border-radius: 9999px;
+    pointer-events: none;
+    background-image: radial-gradient(
+      closest-side,
+      var(--glow-color),
+      transparent
+    );
+  }
+  .glow-center {
+    inset-block-start: calc(50% - var(--glow-size) / 2);
+    inset-inline-start: calc(50% - var(--glow-size) / 2);
+  }
+  .glow-top-start {
+    inset-block-start: calc(var(--glow-size) / -2);
+    inset-inline-start: calc(var(--glow-size) / -2);
+  }
+  .glow-top-end {
+    inset-block-start: calc(var(--glow-size) / -2);
+    inset-inline-end: calc(var(--glow-size) / -2);
+  }
+
+  /* 1px Navy dots every 24px, fading out toward the bottom. */
+  .dot-grid {
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Crect width='1' height='1' fill='%230D2847' fill-opacity='0.08'/%3E%3C/svg%3E");
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+    mask-image: linear-gradient(to bottom, #000, transparent);
+  }
+
+  /* Card icon tile: Light Blue -> Brand Blue. */
+  .icon-tile {
+    background-image: linear-gradient(135deg, #6e93f0, #2b59d8);
+  }
+}
+
 @layer utilities {
   /* Layered radial gradients for the hero atmosphere. Static: free on phones. */
   .bg-atmosphere {

@@ -45,6 +45,7 @@ type Card = { icon: IconName; title: string; body: string };
 export const problem = {
   eyebrow: "Sound familiar?",
   title: "You're great at the work. The phone is the problem.",
+  highlight: "The phone is the problem.",
   cards: [
     {
       icon: "phoneMissed",
@@ -67,6 +68,7 @@ export const problem = {
 export const steps = {
   eyebrow: "How it works",
   title: "From first call to booked job, on autopilot.",
+  highlight: "booked job",
   items: [
     {
       icon: "inbox",
@@ -94,6 +96,7 @@ export const steps = {
 export const results = {
   eyebrow: "The results",
   title: "What changes for your business.",
+  highlight: "your business",
   items: [
     {
       icon: "calendarCheck",
@@ -131,6 +134,7 @@ export const results = {
 export const included = {
   eyebrow: "What's included",
   title: "One system. Everything included.",
+  highlight: "Everything included.",
   body: "No piecing together tools and agencies. We set it all up and run it for you.",
   groups: [
     {
@@ -171,6 +175,7 @@ export const included = {
 export const pricing = {
   eyebrow: "Pricing",
   title: "One simple price.",
+  highlight: "simple price",
   body: "The whole system, done for you. Try it on your real leads before you pay.",
   plan: {
     name: "Scaalus Growth System",
@@ -208,6 +213,7 @@ export const pricing = {
 export const faq = {
   eyebrow: "FAQ",
   title: "Questions, answered.",
+  highlight: "answered.",
   items: [
     {
       q: "Is Scaalus software I have to learn?",

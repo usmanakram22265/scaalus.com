@@ -25,9 +25,9 @@ const base =
   "hover:before:opacity-100 disabled:pointer-events-none disabled:opacity-70";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-brand text-white shadow-button before:bg-royal",
+  primary: "bg-brand text-white shadow-primary before:bg-royal",
   secondary:
-    "bg-surface-elevated text-navy shadow-elevated before:bg-surface-card",
+    "border border-navy/[0.12] bg-surface-elevated text-navy before:bg-surface-card",
 };
 
 const sizes: Record<Size, string> = {

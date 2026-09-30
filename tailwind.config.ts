@@ -99,6 +99,11 @@ const config: Config = {
           "0 1px 2px rgb(13 40 71 / 0.05), 0 6px 16px -4px rgb(13 40 71 / 0.08), 0 0 0 1px rgb(13 40 71 / 0.04)",
         floating:
           "0 2px 4px rgb(13 40 71 / 0.04), 0 16px 32px -8px rgb(13 40 71 / 0.12), 0 40px 80px -20px rgb(13 40 71 / 0.18), 0 0 0 1px rgb(13 40 71 / 0.04)",
+        // Cards on light sections.
+        card: "0 1px 2px rgb(13 40 71 / 0.06), 0 16px 40px -12px rgb(18 52 153 / 0.18)",
+        // Primary buttons: contact shadow, brand glow, top highlight.
+        primary:
+          "0 1px 2px rgb(10 36 114 / 0.2), 0 8px 24px -6px rgb(43 89 216 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.18)",
         button:
           "0 1px 2px rgb(10 36 114 / 0.2), 0 6px 16px -6px rgb(43 89 216 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.18)",
       },

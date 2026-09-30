@@ -1,5 +1,6 @@
 import { steps } from "@/lib/content";
 import { stagger } from "@/lib/style";
+import { Glow } from "./ui/glow";
 import { Icon } from "./ui/icons";
 import { Section } from "./ui/section";
 
@@ -9,9 +10,11 @@ export function HowItWorks() {
       id="how"
       eyebrow={steps.eyebrow}
       title={steps.title}
-      className="bg-surface-card"
+      highlight={steps.highlight}
+      className="overflow-hidden bg-surface-card"
     >
-      <div className="mx-auto max-w-[34rem] lg:max-w-none">
+      <div className="relative isolate mx-auto max-w-[34rem] lg:max-w-none">
+        <Glow size={560} color="rgb(110 147 240 / 0.12)" position="center" />
         <ol className="grid gap-space-lg lg:grid-cols-4 lg:gap-space-md">
           {steps.items.map((step, i) => (
             <li
