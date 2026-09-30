@@ -75,9 +75,9 @@ export function SiteFooter() {
       {/* Oversized wordmark, cropped at the baseline and fading out. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none mt-space-md h-[clamp(3.25rem,15vw,12.5rem)] select-none overflow-hidden [mask-image:linear-gradient(180deg,#000_30%,transparent)] md:mt-space-lg"
+        className="pointer-events-none mt-space-md h-[clamp(3.25rem,15vw,12.5rem)] select-none overflow-hidden [mask-image:linear-gradient(180deg,#000_45%,transparent)] md:mt-space-lg"
       >
-        <p className="text-center font-display text-[clamp(5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-[#0D2947]/[0.06]">
+        <p className="text-center font-display text-[clamp(5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-[#0D2947]/[0.22]">
           {site.name.toLowerCase()}
         </p>
       </div>
