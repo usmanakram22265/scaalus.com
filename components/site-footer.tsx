@@ -8,7 +8,7 @@ const link =
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden pb-[calc(6.5rem+var(--safe-bottom))] pt-space-xl md:pb-space-lg">
+    <footer className="relative overflow-hidden pb-[calc(5.5rem+var(--safe-bottom))] pt-space-xl md:pb-0">
       <div className="container-page grid gap-space-lg md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Logo height={28} className="h-7 w-auto" />
@@ -72,13 +72,15 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized wordmark watermark. */}
-      <p
+      {/* Oversized wordmark, cropped at the baseline and fading out. */}
+      <div
         aria-hidden="true"
-        className="pointer-events-none mt-space-lg select-none text-center font-display text-[clamp(5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-navy/[0.045]"
+        className="pointer-events-none mt-space-lg h-[clamp(3.25rem,15vw,12.5rem)] select-none overflow-hidden [mask-image:linear-gradient(180deg,#000_30%,transparent)]"
       >
-        {site.name.toLowerCase()}
-      </p>
+        <p className="text-center font-display text-[clamp(5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-navy/[0.06]">
+          {site.name.toLowerCase()}
+        </p>
+      </div>
     </footer>
   );
 }

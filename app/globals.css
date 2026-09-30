@@ -358,6 +358,16 @@
   transform: none;
 }
 
+/* A line that draws itself left to right once revealed. */
+.js [data-reveal] .draw-x {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1200ms var(--ease-in-out) 300ms;
+}
+.js [data-reveal][data-shown] .draw-x {
+  transform: none;
+}
+
 /* Hero scene enters once on load (the headline is never hidden). */
 @keyframes scene-in {
   from {
@@ -440,6 +450,11 @@
 }
 .spin-fast {
   animation: spin 1.5s linear infinite;
+}
+
+/* Guarantee seal turns slowly. */
+.spin-badge {
+  animation: spin 24s linear infinite;
 }
 
 /* Typing indicator dots. */
@@ -645,6 +660,7 @@ summary::-webkit-details-marker {
   .ripple,
   .spin-slow,
   .spin-fast,
+  .spin-badge,
   .typing-dot,
   .marquee-track,
   .beam::before {
@@ -652,6 +668,10 @@ summary::-webkit-details-marker {
   }
   .ripple {
     opacity: 0;
+  }
+  .js [data-reveal] .draw-x {
+    transform: none;
+    transition: none;
   }
   .js [data-reveal] .pop,
   .js [data-reveal] .pop.pin {

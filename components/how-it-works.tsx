@@ -8,7 +8,7 @@ export function HowItWorks() {
       id="how"
       aria-labelledby="how-title"
       data-loop=""
-      className="py-section"
+      className="pb-space-xl pt-section"
     >
       <div className="container-page">
         <SectionHeader

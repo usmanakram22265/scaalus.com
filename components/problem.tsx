@@ -74,6 +74,64 @@ function Visual({ index }: { index: number }) {
   );
 }
 
+const lock = problem.lockScreen;
+
+/** A phone lock screen stacking up missed calls. Illustrative. */
+function LockScreen() {
+  return (
+    <div data-reveal="" style={{ "--i": 1 } as CSSProperties}>
+      <div
+        aria-hidden="true"
+        className="panel-navy relative mt-space-lg hidden max-w-[23rem] rounded-[1.75rem] p-5 shadow-floating lg:block"
+      >
+        <p className="flex items-center justify-between font-mono text-[0.625rem] uppercase tracking-[0.08em] text-white/55">
+          <span>{lock.date}</span>
+          <span>{lock.label}</span>
+        </p>
+        <p className="mt-1 font-display text-[3.25rem] font-semibold leading-none tracking-[-0.05em] text-white">
+          {lock.time}
+        </p>
+        <ul className="mt-5 grid gap-2">
+          {lock.calls.map((call, i) => (
+            <li
+              key={call.when}
+              className="pop flex items-center gap-3 rounded-2xl bg-white/[0.08] px-3 py-2.5 ring-1 ring-inset ring-white/10"
+              style={{ "--d": `${300 + i * 180}ms` } as CSSProperties}
+            >
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-white/10 text-sky">
+                <Icon name="phoneMissed" size={15} strokeWidth={2} />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-[0.8125rem] font-semibold text-white">
+                  {lock.missed}
+                </span>
+                <span className="block truncate text-[0.75rem] text-white/60">
+                  {call.who}
+                </span>
+              </span>
+              <span className="font-mono text-[0.6875rem] text-white/55">
+                {call.when}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <a
+        href="#week"
+        className="group mt-space-md inline-flex min-h-11 items-center gap-2 font-semibold text-brand transition-opacity duration-200 ease-out hover:opacity-80 active:opacity-60"
+      >
+        {lock.fix}
+        <Icon
+          name="arrowRight"
+          size={16}
+          strokeWidth={2.25}
+          className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+        />
+      </a>
+    </div>
+  );
+}
+
 export function Problem() {
   return (
     <section
@@ -92,9 +150,10 @@ export function Problem() {
             body={problem.body}
             align="left"
           />
+          <LockScreen />
         </div>
 
-        <ul className="grid gap-4">
+        <ul className="grid content-start gap-4">
           {problem.cards.map((card, i) => (
             <li
               key={card.title}

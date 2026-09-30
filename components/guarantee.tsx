@@ -4,6 +4,36 @@ import { ButtonLink } from "./ui/button";
 import { Icon } from "./ui/icons";
 import { Eyebrow } from "./ui/section";
 
+/** A slowly turning seal: the three promises on a ring around a shield. */
+function RotatingBadge() {
+  return (
+    <div aria-hidden="true" className="relative mb-6 hidden h-28 w-28 lg:block">
+      <svg viewBox="0 0 200 200" className="spin-badge loop h-full w-full">
+        <defs>
+          <path
+            id="badge-ring"
+            d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"
+          />
+        </defs>
+        <circle cx="100" cy="100" r="98" fill="#0D2847" />
+        <text
+          fill="#FFFFFF"
+          fontSize="13.5"
+          letterSpacing="2.4"
+          className="font-mono uppercase"
+        >
+          <textPath href="#badge-ring">{guarantee.badge}</textPath>
+        </text>
+      </svg>
+      <span className="absolute inset-0 grid place-items-center">
+        <span className="icon-chip h-12 w-12 rounded-full">
+          <Icon name="shield" size={24} strokeWidth={2} />
+        </span>
+      </span>
+    </div>
+  );
+}
+
 /** Risk reversal, right after the price. */
 export function Guarantee() {
   return (
@@ -11,10 +41,12 @@ export function Guarantee() {
       <div className="container-page">
         <div
           data-reveal=""
-          className="panel-stone overflow-hidden rounded-[2rem] px-5 py-space-lg sm:px-space-lg lg:rounded-panel lg:py-space-xl"
+          data-loop=""
+          className="panel-stone relative overflow-hidden rounded-[2rem] px-5 py-space-lg sm:px-space-lg lg:rounded-panel lg:py-space-xl"
         >
           <div className="grid items-center gap-space-lg lg:grid-cols-[1.1fr_0.9fr]">
             <div className="text-center lg:text-left">
+              <RotatingBadge />
               <Eyebrow>{guarantee.eyebrow}</Eyebrow>
               <h2
                 id="guarantee-title"

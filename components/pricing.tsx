@@ -17,7 +17,7 @@ export function Pricing() {
         data-tone="dark"
         data-header-dark=""
         data-loop=""
-        className="panel-navy mx-auto max-w-[90rem] rounded-[2rem] py-section lg:rounded-panel"
+        className="panel-navy mx-auto max-w-[90rem] rounded-[2rem] pb-space-2xl pt-section lg:rounded-panel"
       >
         <div className="container-page">
           <SectionHeader
@@ -82,7 +82,7 @@ export function Pricing() {
               <h3 className="text-center text-[clamp(1.375rem,1.2rem+0.8vw,1.75rem)] font-semibold leading-tight tracking-[-0.03em] text-white lg:text-left">
                 {compare.title}
               </h3>
-              <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-card p-4 ring-1 ring-inset ring-white/10 sm:p-5">
                   <p className="font-mono text-label uppercase text-white/60">
                     {compare.agency.label}

@@ -26,22 +26,34 @@ function Pop({
 }
 
 function CalendarVisual() {
-  const filled = new Set([1, 3, 5, 6, 8, 10, 11, 13]);
+  // A week filling up: day headers, morning/midday/afternoon rows.
+  const filled = [1, 3, 5, 6, 8, 10, 11, 13];
   return (
-    <div className="grid w-full max-w-[18rem] grid-cols-5 gap-1.5">
-      {Array.from({ length: 15 }, (_, i) => (
-        <span
-          key={i}
-          className="relative h-8 rounded-lg bg-surface-elevated/80"
-        >
-          {filled.has(i) ? (
-            <Pop
-              d={250 + [...filled].indexOf(i) * 90}
-              className="absolute inset-0 rounded-lg bg-brand shadow-cta"
-            />
-          ) : null}
-        </span>
-      ))}
+    <div className="w-full max-w-[20rem]">
+      <div className="grid grid-cols-5 gap-1.5 pb-2">
+        {v.days.map((d) => (
+          <span
+            key={d}
+            className="text-center font-mono text-[0.625rem] uppercase tracking-[0.08em] text-white/55"
+          >
+            {d}
+          </span>
+        ))}
+      </div>
+      <div className="grid grid-cols-5 gap-1.5">
+        {Array.from({ length: 15 }, (_, i) => (
+          <span key={i} className="relative h-8 rounded-lg bg-white/[0.06]">
+            {filled.includes(i) ? (
+              <Pop
+                d={250 + filled.indexOf(i) * 90}
+                className="absolute inset-0 grid place-items-center rounded-lg bg-sky text-navy shadow-[0_6px_16px_-6px_rgb(110_147_240/0.7)]"
+              >
+                <Icon name="check" size={12} strokeWidth={3} />
+              </Pop>
+            ) : null}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -94,24 +106,35 @@ function ReplyVisual() {
 }
 
 function ReturnVisual() {
+  // Last season's customer → a check-in → booked again.
+  const steps = [
+    { icon: "home" as const, text: v.lastJob },
+    { icon: "message" as const, text: v.checkIn },
+    { icon: "calendarCheck" as const, text: v.bookedAgain },
+  ];
   return (
-    <span className="flex items-center gap-3">
-      <Pop
-        d={200}
-        className="grid h-12 w-12 place-items-center rounded-full bg-surface-elevated text-navy shadow-elevated"
-      >
-        <Icon name="home" size={20} />
-      </Pop>
-      <Pop
-        d={450}
-        className="flex items-center gap-2 rounded-full bg-navy py-2 pl-2 pr-4 text-[0.8125rem] font-semibold text-white shadow-floating"
-      >
-        <span className="grid h-6 w-6 place-items-center rounded-full bg-sky text-navy">
-          <Icon name="repeat" size={12} strokeWidth={2.5} />
-        </span>
-        {v.welcome}
-      </Pop>
-    </span>
+    <div className="relative flex w-full max-w-[26rem] items-center justify-between gap-2">
+      <span className="absolute inset-x-8 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-white/10 via-sky/50 to-sky" />
+      {steps.map((step, i) => {
+        const last = i === steps.length - 1;
+        return (
+          <Pop
+            key={step.text}
+            d={200 + i * 220}
+            className={`relative flex flex-col items-center gap-1.5 rounded-2xl px-2.5 py-2.5 text-center sm:gap-2 sm:px-3 ${
+              last
+                ? "bg-sky text-navy shadow-[0_10px_24px_-10px_rgb(110_147_240/0.8)]"
+                : "bg-white/[0.07] text-white ring-1 ring-inset ring-white/10"
+            }`}
+          >
+            <Icon name={step.icon} size={16} strokeWidth={2} />
+            <span className="whitespace-nowrap text-[0.6875rem] font-semibold sm:text-[0.75rem]">
+              {step.text}
+            </span>
+          </Pop>
+        );
+      })}
+    </div>
   );
 }
 
@@ -181,13 +204,15 @@ const visuals = [
 
 // Zig-zag bento: wide, narrow / narrow, wide / narrow, wide.
 const spans = ["lg:col-span-2", "", "", "lg:col-span-2", "", "lg:col-span-2"];
+// Two navy tiles break up the light grid.
+const darkTiles = new Set([0, 3]);
 
 export function Outcomes() {
   return (
     <section
       id="results"
       aria-labelledby="results-title"
-      className="py-section"
+      className="pb-section pt-space-xl"
     >
       <div className="container-page">
         <SectionHeader
@@ -210,7 +235,9 @@ export function Outcomes() {
                 <span aria-hidden="true" className="spotlight" />
                 <div
                   aria-hidden="true"
-                  className="panel-stone relative grid h-44 place-items-center overflow-hidden rounded-[1.1rem] p-5"
+                  className={`relative grid h-44 place-items-center overflow-hidden rounded-[1.1rem] p-5 ${
+                    darkTiles.has(i) ? "panel-navy" : "panel-stone"
+                  }`}
                 >
                   <Visual />
                 </div>

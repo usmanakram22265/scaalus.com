@@ -122,6 +122,19 @@ export const problem = {
   title: "Every missed call is a job for someone else.",
   highlight: "a job for someone else.",
   body: "You're great at the work. The phone is the problem.",
+  // Illustrative lock screen: a normal day of calls you couldn't take.
+  lockScreen: {
+    label: "Example",
+    time: "5:48",
+    date: "Tuesday, on the job all day",
+    missed: "Missed call",
+    calls: [
+      { who: "Unknown caller", when: "7:12 AM" },
+      { who: "Unknown caller", when: "12:40 PM" },
+      { who: "Unknown caller", when: "3:05 PM" },
+    ],
+    fix: "See how we fix it",
+  },
   cards: [
     {
       icon: "phoneMissed",
@@ -256,7 +269,10 @@ export const results = {
   visual: {
     booked: "Booked",
     reply: "On it! When works?",
-    welcome: "Welcome back",
+    days: ["Mon", "Tue", "Wed", "Thu", "Fri"],
+    lastJob: "Last spring",
+    checkIn: "Check-in sent",
+    bookedAgain: "Booked again",
     rank: "Near me",
     answered: "Answered",
   },
@@ -267,6 +283,9 @@ export const included = {
   title: "We set it up and run it. You do the work.",
   highlight: "You do the work.",
   body: "No piecing together tools and agencies. One system, everything included.",
+  strip: "Every piece, set up and run for you.",
+  stripPrice: "$297/month",
+  stripCta: "Start free trial",
   groups: [
     {
       icon: "search",
@@ -360,6 +379,7 @@ export const guarantee = {
     },
   ] satisfies Card[],
   cta: "Start your free trial",
+  badge: "7-day free trial · No contract · Satisfaction guarantee · ",
 };
 
 export const faq = {
