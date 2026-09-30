@@ -2,79 +2,128 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
- * Brand tokens (space-separated RGB so Tailwind can apply alpha).
- * PLACEHOLDER palette — replace with the exact values from brand_assets/
- * once a color guide is added. Do not invent additional brand colors.
- */
+/* Brand palette: see brand_assets/README.md. Tailwind tokens live in tailwind.config.ts. */
 :root {
-  --brand-50: 240 247 244;
-  --brand-100: 217 236 229;
-  --brand-200: 180 216 203;
-  --brand-300: 131 187 169;
-  --brand-400: 82 152 132;
-  --brand-500: 47 120 101;
-  --brand-600: 34 97 82;
-  --brand-700: 29 78 67;
-  --brand-800: 25 62 54;
-  --brand-900: 20 46 40;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --header-h: 3.5rem;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
 
-  --ink: 18 24 22;
-  --ink-muted: 84 96 92;
-
-  --surface-base: 250 248 244;
-  --surface-elevated: 255 255 255;
-  --surface-floating: 255 255 255;
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 4rem;
+  }
 }
 
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
-    @apply bg-surface-base font-sans leading-body text-ink;
+    @apply bg-surface-base font-sans text-body text-ink;
+    overflow-x: clip;
   }
 
   h1,
   h2,
   h3 {
-    @apply font-display tracking-tightest;
-    line-height: 1.1;
+    @apply font-display text-ink;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Anchored sections land below the fixed header. */
+  [id] {
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+
+  /* Controls: instant taps, no long-press text selection. Content stays selectable. */
+  a,
+  button,
+  summary,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+
+  button,
+  summary,
+  .btn {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* 16px minimum stops iOS Safari zooming into fields. */
+  input,
+  select,
+  textarea {
+    font-size: max(16px, 1rem);
   }
 
   :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-brand-500;
+    @apply outline outline-2 outline-offset-2 outline-brand;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
-    }
+  [data-tone="dark"] :focus-visible {
+    outline-color: #6e93f0;
+  }
+
+  ::selection {
+    background: rgb(110 147 240 / 0.3);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-page px-5 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply text-eyebrow uppercase text-brand;
+  }
+
+  /* Brand gradient text — only on large display type (contrast). */
+  .text-gradient {
+    background-image: linear-gradient(95deg, #6e93f0 -25%, #2b59d8 60%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }
 
 @layer utilities {
-  /* Layered radial gradients for atmospheric backgrounds. */
+  /* Layered radial gradients for the hero atmosphere. Static: free on phones. */
   .bg-atmosphere {
     background-image:
       radial-gradient(
-        60% 50% at 15% 10%,
-        rgb(var(--brand-200) / 0.55),
+        55% 45% at 12% 8%,
+        rgb(110 147 240 / 0.22),
         transparent 70%
       ),
       radial-gradient(
-        45% 40% at 85% 20%,
-        rgb(var(--brand-300) / 0.35),
+        45% 40% at 90% 18%,
+        rgb(43 89 216 / 0.12),
         transparent 70%
       ),
       radial-gradient(
-        70% 60% at 50% 100%,
-        rgb(var(--brand-100) / 0.6),
+        70% 55% at 50% 100%,
+        rgb(243 241 236 / 0.9),
         transparent 75%
       );
   }
@@ -90,8 +139,101 @@
     inset: 0;
     z-index: -1;
     pointer-events: none;
-    opacity: 0.08;
+    opacity: 0.06;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .pb-safe {
+    padding-bottom: var(--safe-bottom);
+  }
+}
+
+/* ---------- Motion ---------- */
+
+/* One-time hero entrance on load. No JS needed. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 700ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 60ms);
+}
+
+/*
+ * Scroll reveal. Content is only hidden once JS has marked <html class="js">,
+ * so visitors without JS still see everything. RevealObserver sets data-shown.
+ */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+.js [data-reveal][data-shown] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Timeline connector that draws once in view. */
+.js [data-draw] {
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 900ms var(--ease-in-out);
+  transition-delay: calc(var(--i, 0) * 60ms + 300ms);
+}
+@media (min-width: 1024px) {
+  .js [data-draw] {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+}
+.js [data-draw][data-shown] {
+  transform: none;
+}
+
+/* FAQ: chevron rotates, answer fades in. Height is never animated. */
+details[open] > summary .faq-chevron {
+  transform: rotate(180deg);
+}
+details[open] > .faq-body {
+  animation: rise 320ms var(--ease-out) both;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise,
+  details[open] > .faq-body {
+    animation: none;
+  }
+  .js [data-reveal] {
+    transform: none;
+    transition: opacity 300ms ease;
+  }
+  .js [data-draw] {
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  .js [data-reveal] {
+    transition-duration: 300ms !important;
   }
 }

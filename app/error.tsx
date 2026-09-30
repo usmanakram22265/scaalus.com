@@ -1,5 +1,7 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+
 type Props = {
   error: Error & { digest?: string };
   reset: () => void;
@@ -7,15 +9,12 @@ type Props = {
 
 export default function Error({ reset }: Props) {
   return (
-    <main className="flex min-h-dvh flex-col items-center justify-center gap-space-md px-space-md text-center">
-      <h1 className="text-4xl text-brand-900">Something went wrong</h1>
-      <button
-        type="button"
-        onClick={reset}
-        className="rounded-full bg-brand-700 px-space-md py-space-xs text-white shadow-elevated transition-transform duration-300 ease-spring hover:-translate-y-0.5 hover:bg-brand-800 active:translate-y-0 active:scale-[0.98]"
-      >
-        Try again
-      </button>
+    <main className="flex min-h-[100svh] flex-col items-center justify-center gap-space-md px-5 text-center">
+      <h1 className="text-display-lg">Something went wrong</h1>
+      <p className="max-w-prose text-ink-muted">
+        Please try again. If it keeps happening, call us.
+      </p>
+      <Button onClick={reset}>Try again</Button>
     </main>
   );
 }

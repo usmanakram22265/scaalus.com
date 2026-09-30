@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Brand tokens live as CSS variables in app/globals.css — change them there.
+ * Brand tokens come from brand_assets/README.md — use these exact values.
  * The default Tailwind color palette is intentionally replaced (not extended)
  * so generic utilities like `bg-indigo-500` are unavailable.
  */
@@ -10,38 +10,61 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // Gate every `hover:` behind (hover: hover) so taps never leave a sticky hover state.
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      white: "#ffffff",
-      black: "#000000",
-      brand: {
-        50: "rgb(var(--brand-50) / <alpha-value>)",
-        100: "rgb(var(--brand-100) / <alpha-value>)",
-        200: "rgb(var(--brand-200) / <alpha-value>)",
-        300: "rgb(var(--brand-300) / <alpha-value>)",
-        400: "rgb(var(--brand-400) / <alpha-value>)",
-        500: "rgb(var(--brand-500) / <alpha-value>)",
-        600: "rgb(var(--brand-600) / <alpha-value>)",
-        700: "rgb(var(--brand-700) / <alpha-value>)",
-        800: "rgb(var(--brand-800) / <alpha-value>)",
-        900: "rgb(var(--brand-900) / <alpha-value>)",
-      },
+      white: "#FFFFFF",
+      navy: "#0D2847",
+      deep: "#0A2472",
+      royal: "#123499",
+      brand: "#2B59D8",
+      sky: "#6E93F0",
       ink: {
-        DEFAULT: "rgb(var(--ink) / <alpha-value>)",
-        muted: "rgb(var(--ink-muted) / <alpha-value>)",
+        DEFAULT: "#0D2847",
+        muted: "#5B6573",
       },
       surface: {
-        base: "rgb(var(--surface-base) / <alpha-value>)",
-        elevated: "rgb(var(--surface-elevated) / <alpha-value>)",
-        floating: "rgb(var(--surface-floating) / <alpha-value>)",
+        base: "#FAF9F6",
+        card: "#F3F1EC",
+        elevated: "#FFFFFF",
       },
+      // Functional only: form validation. Not a brand color.
+      danger: "#B42318",
     },
     extend: {
       fontFamily: {
-        display: ["var(--font-display)", "Georgia", "serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+      },
+      // Mobile-first fluid scale; tracking tightens as size grows.
+      fontSize: {
+        "display-xl": [
+          "clamp(2.375rem, 1.5rem + 4vw, 4.5rem)",
+          { lineHeight: "1.04", letterSpacing: "-0.03em", fontWeight: "700" },
+        ],
+        "display-lg": [
+          "clamp(1.875rem, 1.3rem + 2.6vw, 3.25rem)",
+          { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "700" },
+        ],
+        title: [
+          "clamp(1.25rem, 1.15rem + 0.3vw, 1.375rem)",
+          { lineHeight: "1.3", letterSpacing: "-0.015em", fontWeight: "600" },
+        ],
+        lead: [
+          "clamp(1.0625rem, 0.98rem + 0.4vw, 1.25rem)",
+          { lineHeight: "1.6" },
+        ],
+        body: ["1.0625rem", { lineHeight: "1.7" }],
+        small: ["0.9375rem", { lineHeight: "1.6" }],
+        eyebrow: [
+          "0.8125rem",
+          { lineHeight: "1.4", letterSpacing: "0.02em", fontWeight: "600" },
+        ],
       },
       letterSpacing: {
         tightest: "-0.03em",
@@ -59,22 +82,36 @@ const config: Config = {
         "space-xl": "4rem",
         "space-2xl": "6rem",
         "space-3xl": "9rem",
+        section: "clamp(6rem, 4.5rem + 6vw, 9rem)",
+        header: "3.5rem",
+        "header-lg": "4rem",
       },
-      // Layered, brand-tinted, low-opacity shadows (base → elevated → floating).
+      maxWidth: {
+        page: "70rem",
+        prose: "36rem",
+      },
+      borderRadius: {
+        card: "1.75rem",
+      },
+      // Layered, navy-tinted, low-opacity shadows (base → elevated → floating).
       boxShadow: {
         elevated:
-          "0 1px 2px rgb(var(--brand-900) / 0.06), 0 4px 12px -2px rgb(var(--brand-900) / 0.08)",
+          "0 1px 2px rgb(13 40 71 / 0.05), 0 6px 16px -4px rgb(13 40 71 / 0.08), 0 0 0 1px rgb(13 40 71 / 0.04)",
         floating:
-          "0 2px 4px rgb(var(--brand-900) / 0.05), 0 12px 24px -6px rgb(var(--brand-900) / 0.10), 0 32px 64px -12px rgb(var(--brand-900) / 0.14)",
+          "0 2px 4px rgb(13 40 71 / 0.04), 0 16px 32px -8px rgb(13 40 71 / 0.12), 0 40px 80px -20px rgb(13 40 71 / 0.18), 0 0 0 1px rgb(13 40 71 / 0.04)",
+        button:
+          "0 1px 2px rgb(10 36 114 / 0.2), 0 6px 16px -6px rgb(43 89 216 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.18)",
       },
       zIndex: {
         base: "0",
         elevated: "10",
         floating: "50",
       },
+      // Emil Kowalski's curves: strong ease-out for UI, ease-in-out for on-screen movement.
       transitionTimingFunction: {
-        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
-        "out-expo": "cubic-bezier(0.16, 1, 0.3, 1)",
+        out: "cubic-bezier(0.23, 1, 0.32, 1)",
+        "in-out": "cubic-bezier(0.77, 0, 0.175, 1)",
+        drawer: "cubic-bezier(0.32, 0.72, 0, 1)",
       },
     },
   },
