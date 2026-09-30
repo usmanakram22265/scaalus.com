@@ -6,8 +6,8 @@ import type {
 } from "react";
 import { Icon } from "./icons";
 
-type Variant = "primary" | "secondary";
-type Size = "md" | "lg";
+type Variant = "primary" | "secondary" | "ghost-dark";
+type Size = "sm" | "md" | "lg";
 
 type StyleProps = {
   variant?: Variant;
@@ -22,17 +22,20 @@ const base =
   "btn group relative isolate inline-flex items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-full font-semibold " +
   "transition-transform duration-150 ease-out active:scale-[0.97] " +
   "before:absolute before:inset-0 before:-z-10 before:opacity-0 before:transition-opacity before:duration-200 before:ease-out before:content-[''] " +
-  "hover:before:opacity-100 disabled:pointer-events-none disabled:opacity-70";
+  "hover:before:opacity-100 active:before:opacity-100 disabled:pointer-events-none disabled:opacity-70";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-brand text-white shadow-primary before:bg-royal",
+  primary: "sheen bg-brand text-white shadow-cta before:bg-royal",
   secondary:
-    "border border-navy/[0.12] bg-surface-elevated text-navy before:bg-surface-card",
+    "bg-surface-elevated text-navy shadow-elevated before:bg-surface-card",
+  "ghost-dark":
+    "bg-white/[0.08] text-white ring-1 ring-inset ring-white/[0.16] before:bg-white/[0.08]",
 };
 
 const sizes: Record<Size, string> = {
+  sm: "h-10 px-4 text-[0.875rem]",
   md: "h-12 px-5 text-[0.9375rem]",
-  lg: "h-[3.25rem] px-7 text-base",
+  lg: "h-14 px-7 text-base",
 };
 
 function classes({
@@ -54,7 +57,7 @@ function Content({ arrow, children }: Pick<StyleProps, "arrow" | "children">) {
           name="arrowRight"
           size={18}
           strokeWidth={2}
-          className="-mr-1 transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+          className="-mr-1 transition-transform duration-200 ease-out group-hover:translate-x-1"
         />
       ) : null}
     </>

@@ -1,97 +1,76 @@
 import type { ReactNode } from "react";
+import { BarsGlyph } from "./bars";
 
-type Props = {
-  id?: string;
-  eyebrow?: string;
+type TitleProps = {
   title: string;
-  /** Part of `title` to colour (from lib/content.ts). */
+  /** Part of `title` to emphasise (from lib/content.ts). */
   highlight?: string;
-  body?: string;
-  align?: "center" | "left";
-  /** Dark sections: white headings, 75% white body, Light Blue eyebrow. */
-  tone?: "light" | "dark";
-  /** Decorative background (glows), clipped to the section. */
-  decor?: ReactNode;
-  className?: string;
-  children?: ReactNode;
+  dark?: boolean;
 };
 
-function Title({
-  title,
-  highlight,
-  dark,
-}: {
-  title: string;
-  highlight?: string;
-  dark: boolean;
-}) {
+/** Two-tone headline: the key phrase in full ink, the rest muted. */
+export function TwoTone({ title, highlight, dark }: TitleProps) {
   const at = highlight ? title.indexOf(highlight) : -1;
   if (!highlight || at < 0) return <>{title}</>;
+  const muted = dark ? "text-white/60" : "text-ink-muted";
+  const strong = dark ? "text-white" : "text-navy";
+  const before = title.slice(0, at);
+  const after = title.slice(at + highlight.length);
   return (
     <>
-      {title.slice(0, at)}
-      <span className={dark ? "text-sky" : "text-brand"}>{highlight}</span>
-      {title.slice(at + highlight.length)}
+      {before ? <span className={muted}>{before}</span> : null}
+      <span className={strong}>{highlight}</span>
+      {after ? <span className={muted}>{after}</span> : null}
     </>
   );
 }
 
-/** Shared section rhythm: container, eyebrow, heading and spacing tokens. */
-export function Section({
+export function Eyebrow({ children }: { children: ReactNode }) {
+  return (
+    <p className="label">
+      <BarsGlyph />
+      {children}
+    </p>
+  );
+}
+
+type HeaderProps = TitleProps & {
+  id?: string;
+  eyebrow?: string;
+  body?: string;
+  align?: "center" | "left";
+  className?: string;
+  as?: "h2" | "h3";
+};
+
+/** Section heading block: mono eyebrow, two-tone title, optional lead. */
+export function SectionHeader({
   id,
   eyebrow,
   title,
   highlight,
   body,
+  dark,
   align = "center",
-  tone = "light",
-  decor,
   className,
-  children,
-}: Props) {
+}: HeaderProps) {
   const centered = align === "center";
-  const dark = tone === "dark";
   return (
-    <section
-      id={id}
-      aria-labelledby={id ? `${id}-title` : undefined}
-      data-tone={tone}
-      className={`py-section ${decor ? "relative isolate" : ""} ${className ?? ""}`}
+    <header
+      data-reveal=""
+      className={`max-w-[44rem] ${centered ? "mx-auto text-center" : ""} ${className ?? ""}`}
     >
-      {decor ? (
-        <div aria-hidden="true" className="decor-layer">
-          {decor}
-        </div>
-      ) : null}
-      <div className="container-page">
-        <header
-          className={`max-w-[40rem] ${centered ? "mx-auto text-center" : ""}`}
-          data-reveal=""
+      {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+      <h2 id={id ? `${id}-title` : undefined} className="mt-4 text-display-xl">
+        <TwoTone title={title} highlight={highlight} dark={dark} />
+      </h2>
+      {body ? (
+        <p
+          className={`mt-5 max-w-prose text-lead ${dark ? "text-white/70" : "text-ink-muted"} ${centered ? "mx-auto" : ""}`}
         >
-          {eyebrow ? (
-            <p
-              className={`eyebrow eyebrow-pill ${dark ? "text-sky" : ""}`}
-              style={centered ? undefined : { marginInline: 0 }}
-            >
-              {eyebrow}
-            </p>
-          ) : null}
-          <h2
-            id={id ? `${id}-title` : undefined}
-            className={`mt-3 text-display-lg ${dark ? "text-white" : ""}`}
-          >
-            <Title title={title} highlight={highlight} dark={dark} />
-          </h2>
-          {body ? (
-            <p
-              className={`mt-4 text-lead ${dark ? "text-white/75" : "text-ink-muted"} ${centered ? "mx-auto" : ""} max-w-prose`}
-            >
-              {body}
-            </p>
-          ) : null}
-        </header>
-        {children ? <div className="mt-space-xl">{children}</div> : null}
-      </div>
-    </section>
+          {body}
+        </p>
+      ) : null}
+    </header>
   );
 }

@@ -1,41 +1,64 @@
 import { z } from "zod";
-import { trades } from "./content";
 
 export const trialFields = [
   "name",
   "business",
-  "trade",
   "phone",
   "email",
+  "notes",
 ] as const;
 export type TrialField = (typeof trialFields)[number];
 
 /** Hidden field real people never fill in. */
 export const HONEYPOT = "company_website";
 
-export const trialSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, "Enter your name")
-    .max(80, "Keep it under 80 characters"),
-  business: z
-    .string()
-    .trim()
-    .min(2, "Enter your business name")
-    .max(120, "Keep it under 120 characters"),
-  trade: z.enum(trades, "Choose your trade"),
-  phone: z
-    .string()
-    .transform((value) => value.replace(/\D/g, ""))
-    .pipe(z.string().regex(/^1?\d{10}$/, "Enter a 10-digit US phone number"))
-    .transform((digits) => digits.slice(-10)),
-  email: z
-    .string()
-    .trim()
-    .toLowerCase()
-    .pipe(z.email("Enter a valid email address")),
-});
+// Empty strings mean "not given" for the optional fields.
+const optional = (value: string) => value.trim() === "";
+
+export const trialSchema = z
+  .object({
+    name: z
+      .string()
+      .trim()
+      .min(2, "Enter your name")
+      .max(80, "Keep it under 80 characters"),
+    business: z
+      .string()
+      .trim()
+      .min(2, "Enter your business name")
+      .max(120, "Keep it under 120 characters"),
+    phone: z
+      .string()
+      .transform((value) => value.replace(/\D/g, ""))
+      .refine(
+        (digits) => digits === "" || /^1?\d{10}$/.test(digits),
+        "Enter a 10-digit US phone number",
+      )
+      .transform((digits) => (digits === "" ? undefined : digits.slice(-10))),
+    email: z
+      .string()
+      .trim()
+      .toLowerCase()
+      .refine(
+        (value) => optional(value) || z.email().safeParse(value).success,
+        "Enter a valid email address",
+      )
+      .transform((value) => (value === "" ? undefined : value)),
+    notes: z
+      .string()
+      .trim()
+      .max(1000, "Keep it under 1,000 characters")
+      .transform((value) => (value === "" ? undefined : value)),
+  })
+  .superRefine((data, ctx) => {
+    if (!data.phone && !data.email) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["phone"],
+        message: "Add a phone number or an email so we can reach you",
+      });
+    }
+  });
 
 export type TrialRequest = z.infer<typeof trialSchema>;
 

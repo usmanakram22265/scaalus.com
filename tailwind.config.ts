@@ -40,34 +40,36 @@ const config: Config = {
       fontFamily: {
         display: ["var(--font-display)", "system-ui", "sans-serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       // Mobile-first fluid scale; tracking tightens as size grows.
       fontSize: {
+        "display-2xl": [
+          "clamp(2.5rem, 1.55rem + 4.2vw, 4.75rem)",
+          { lineHeight: "1.02", letterSpacing: "-0.042em", fontWeight: "600" },
+        ],
         "display-xl": [
-          "clamp(2.375rem, 1.5rem + 4vw, 4.5rem)",
-          { lineHeight: "1.04", letterSpacing: "-0.03em", fontWeight: "700" },
+          "clamp(2.125rem, 1.5rem + 2.9vw, 3.75rem)",
+          { lineHeight: "1.04", letterSpacing: "-0.038em", fontWeight: "600" },
         ],
         "display-lg": [
-          "clamp(1.875rem, 1.3rem + 2.6vw, 3.25rem)",
-          { lineHeight: "1.08", letterSpacing: "-0.03em", fontWeight: "700" },
+          "clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem)",
+          { lineHeight: "1.08", letterSpacing: "-0.032em", fontWeight: "600" },
         ],
         title: [
-          "clamp(1.25rem, 1.15rem + 0.3vw, 1.375rem)",
-          { lineHeight: "1.3", letterSpacing: "-0.015em", fontWeight: "600" },
+          "clamp(1.1875rem, 1.12rem + 0.3vw, 1.3125rem)",
+          { lineHeight: "1.3", letterSpacing: "-0.018em", fontWeight: "600" },
         ],
         lead: [
-          "clamp(1.0625rem, 0.98rem + 0.4vw, 1.25rem)",
-          { lineHeight: "1.6" },
+          "clamp(1.0625rem, 0.99rem + 0.35vw, 1.1875rem)",
+          { lineHeight: "1.65" },
         ],
         body: ["1.0625rem", { lineHeight: "1.7" }],
         small: ["0.9375rem", { lineHeight: "1.6" }],
-        eyebrow: [
-          "0.8125rem",
-          { lineHeight: "1.4", letterSpacing: "0.02em", fontWeight: "600" },
+        label: [
+          "0.75rem",
+          { lineHeight: "1.2", letterSpacing: "0.08em", fontWeight: "500" },
         ],
-      },
-      letterSpacing: {
-        tightest: "-0.03em",
       },
       lineHeight: {
         body: "1.7",
@@ -82,30 +84,31 @@ const config: Config = {
         "space-xl": "4rem",
         "space-2xl": "6rem",
         "space-3xl": "9rem",
-        section: "clamp(6rem, 4.5rem + 6vw, 9rem)",
-        header: "3.5rem",
-        "header-lg": "4rem",
+        section: "clamp(5.5rem, 4rem + 6vw, 8.5rem)",
+        header: "4rem",
       },
       maxWidth: {
-        page: "70rem",
+        page: "74rem",
         prose: "36rem",
       },
       borderRadius: {
-        card: "1.75rem",
+        card: "1.5rem",
+        panel: "2.5rem",
       },
       // Layered, navy-tinted, low-opacity shadows (base → elevated → floating).
       boxShadow: {
         elevated:
-          "0 1px 2px rgb(13 40 71 / 0.05), 0 6px 16px -4px rgb(13 40 71 / 0.08), 0 0 0 1px rgb(13 40 71 / 0.04)",
+          "0 1px 2px rgb(13 40 71 / 0.05), 0 8px 24px -8px rgb(13 40 71 / 0.10), 0 0 0 1px rgb(13 40 71 / 0.05)",
+        "elevated-hover":
+          "0 2px 4px rgb(13 40 71 / 0.05), 0 18px 40px -12px rgb(18 52 153 / 0.22), 0 0 0 1px rgb(13 40 71 / 0.06)",
         floating:
-          "0 2px 4px rgb(13 40 71 / 0.04), 0 16px 32px -8px rgb(13 40 71 / 0.12), 0 40px 80px -20px rgb(13 40 71 / 0.18), 0 0 0 1px rgb(13 40 71 / 0.04)",
-        // Cards on light sections.
-        card: "0 1px 2px rgb(13 40 71 / 0.06), 0 16px 40px -12px rgb(18 52 153 / 0.18)",
-        // Primary buttons: contact shadow, brand glow, top highlight.
-        primary:
-          "0 1px 2px rgb(10 36 114 / 0.2), 0 8px 24px -6px rgb(43 89 216 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.18)",
-        button:
-          "0 1px 2px rgb(10 36 114 / 0.2), 0 6px 16px -6px rgb(43 89 216 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.18)",
+          "0 2px 4px rgb(13 40 71 / 0.05), 0 20px 40px -12px rgb(13 40 71 / 0.18), 0 48px 96px -24px rgb(10 36 114 / 0.28), 0 0 0 1px rgb(13 40 71 / 0.05)",
+        // On navy: deep drop + a 1px top highlight so cards read as lit from above.
+        "on-navy":
+          "0 24px 60px -16px rgb(3 10 30 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.10), 0 0 0 1px rgb(255 255 255 / 0.08)",
+        cta: "0 1px 2px rgb(10 36 114 / 0.25), 0 10px 28px -8px rgb(43 89 216 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.22)",
+        header:
+          "0 1px 2px rgb(13 40 71 / 0.06), 0 10px 30px -12px rgb(13 40 71 / 0.18), 0 0 0 1px rgb(13 40 71 / 0.06)",
       },
       zIndex: {
         base: "0",

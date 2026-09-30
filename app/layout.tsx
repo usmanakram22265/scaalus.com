@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import { site } from "@/lib/content";
 import "./globals.css";
 
-const display = Plus_Jakarta_Sans({
+const display = Geist({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["500", "600"],
   display: "swap",
 });
 
@@ -14,6 +14,15 @@ const sans = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
+});
+
+// Small labels only (times, eyebrows, prices in mockups): not worth a preload.
+const mono = Geist_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -69,7 +78,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   interactiveWidget: "resizes-content",
-  themeColor: "#FAF9F6",
+  themeColor: "#0D2847",
   colorScheme: "light",
 };
 
@@ -81,7 +90,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html
       lang="en-US"
-      className={`${display.variable} ${sans.variable}`}
+      className={`${display.variable} ${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <head>
