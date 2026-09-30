@@ -8,13 +8,17 @@ import { Icon } from "./ui/icons";
 import { Logo } from "./ui/logo";
 
 /**
- * Floating pill header. Always opaque: solid Navy while a navy panel sits
- * under it, solid white elsewhere, switched instantly so it never blends.
- * A 2px bar along its bottom edge shows scroll progress (transform only).
+ * Floating pill header. Always opaque: a Royal → Navy sweep (continued in the
+ * hero gradient) while a navy panel sits under it, white elsewhere, switched
+ * instantly so it never blends. A dot slides under the section you're reading,
+ * and a 2px bar along the bottom edge shows scroll progress (transform only).
  */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [overDark, setOverDark] = useState(true);
+  const [active, setActive] = useState(-1);
+  const navEl = useRef<HTMLElement>(null);
+  const dot = useRef<HTMLSpanElement>(null);
   const header = useRef<HTMLElement>(null);
   const progress = useRef<HTMLSpanElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -25,6 +29,9 @@ export function SiteHeader() {
     const darkPanels = [
       ...document.querySelectorAll<HTMLElement>("[data-header-dark]"),
     ];
+    const sections = nav.map((item) =>
+      document.querySelector<HTMLElement>(item.href),
+    );
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -34,6 +41,15 @@ export function SiteHeader() {
         darkPanels.some((el) => {
           const r = el.getBoundingClientRect();
           return r.top <= line && r.bottom > line;
+        }),
+      );
+      // Scroll-spy: the section crossing a line just under the header.
+      const spy = line + 80;
+      setActive(
+        sections.findIndex((el) => {
+          if (!el) return false;
+          const r = el.getBoundingClientRect();
+          return r.top <= spy && r.bottom > spy;
         }),
       );
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -53,6 +69,20 @@ export function SiteHeader() {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
+
+  // Slide the dot under the active link (transform only).
+  useEffect(() => {
+    const place = () => {
+      const link =
+        active >= 0 ? navEl.current?.querySelectorAll("a")[active] : null;
+      if (!dot.current || !link) return;
+      const x = link.offsetLeft + link.offsetWidth / 2 - 2;
+      dot.current.style.transform = `translateX(${x}px)`;
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [active]);
 
   useEffect(() => {
     if (!open) return;
@@ -110,14 +140,14 @@ export function SiteHeader() {
       className="fixed inset-x-0 top-0 z-floating px-3 pt-[calc(env(safe-area-inset-top)+var(--header-gap))] sm:px-5"
     >
       <div
-        className={`relative mx-auto flex h-header max-w-page items-center justify-between gap-3 overflow-hidden rounded-full pl-4 pr-2 lg:h-[3.75rem] lg:pl-6 ${
-          dark ? "bg-navy shadow-on-navy" : "bg-surface-elevated shadow-header"
+        className={`relative mx-auto flex h-header max-w-page items-center justify-between gap-3 overflow-hidden rounded-full pl-4 pr-1.5 lg:h-[3.75rem] lg:pl-6 lg:pr-2 ${
+          dark ? "nav-dark" : "nav-light"
         }`}
       >
         <Link
           href="#top"
           onClick={closeForNavigation}
-          className="-m-2 rounded-full p-2 transition-transform duration-150 ease-out active:scale-[0.97]"
+          className="-m-2 shrink-0 rounded-full p-2 transition-transform duration-150 ease-out active:scale-[0.97]"
           aria-label={copy.home}
         >
           <Logo
@@ -133,31 +163,67 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav aria-label="Main" className="hidden items-center md:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`rounded-full px-3.5 py-2 text-small font-medium transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-60 ${
-                dark ? "text-white opacity-75" : "text-navy opacity-70"
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav
+          ref={navEl}
+          aria-label="Main"
+          className="relative hidden items-center md:flex"
+        >
+          {nav.map((item, i) => {
+            const current = i === active;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={current ? "location" : undefined}
+                className={`relative isolate rounded-full px-3.5 py-2 text-small font-medium tracking-[-0.005em] transition-opacity duration-200 ease-out before:absolute before:inset-0 before:-z-10 before:rounded-full before:opacity-0 before:transition-opacity before:duration-200 before:ease-out before:content-[''] hover:opacity-100 hover:before:opacity-100 active:opacity-70 ${
+                  dark
+                    ? "text-white before:bg-white/[0.08]"
+                    : "text-navy before:bg-surface-card"
+                } ${current ? "opacity-100" : dark ? "opacity-75" : "opacity-70"}`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          {/* Active-section dot. */}
+          <span
+            ref={dot}
+            aria-hidden="true"
+            className={`pointer-events-none absolute -bottom-1 left-0 h-1 w-1 rounded-full transition-[opacity,transform] duration-500 ease-out ${
+              dark ? "bg-sky" : "bg-brand"
+            } ${active >= 0 ? "opacity-100" : "opacity-0"}`}
+          />
         </nav>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5">
           <a
             href={site.phone.href}
-            className={`hidden h-10 items-center gap-2 rounded-full px-3 text-small font-medium transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-60 lg:inline-flex ${
-              dark ? "text-white opacity-80" : "text-navy opacity-75"
+            aria-label={site.phone.display}
+            className={`group hidden h-10 items-center gap-2.5 rounded-full pl-1 pr-3 text-small font-medium transition-[opacity,transform] duration-200 ease-out hover:opacity-100 active:scale-[0.97] lg:inline-flex ${
+              dark ? "text-white opacity-85" : "text-navy opacity-80"
             }`}
           >
-            <Icon name="phone" size={15} strokeWidth={2} />
-            {site.phone.display}
+            <span
+              className={`grid h-8 w-8 place-items-center rounded-full transition-transform duration-200 ease-out group-hover:-rotate-12 ${
+                dark
+                  ? "bg-white/[0.08] text-sky ring-1 ring-inset ring-white/10"
+                  : "bg-surface-card text-brand"
+              }`}
+            >
+              <Icon name="phone" size={14} strokeWidth={2} />
+            </span>
+            <span className="hidden xl:inline">{site.phone.display}</span>
           </a>
-          <ButtonLink href="#trial" size="sm" className="hidden md:inline-flex">
+          <span
+            aria-hidden="true"
+            className={`mx-1 hidden h-5 w-px lg:block ${dark ? "bg-white/15" : "bg-navy/10"}`}
+          />
+          <ButtonLink
+            href="#trial"
+            size="sm"
+            arrow
+            className="hidden md:inline-flex lg:h-11 lg:px-5"
+          >
             {copy.cta}
           </ButtonLink>
           <ButtonLink
@@ -175,7 +241,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? copy.closeMenu : copy.openMenu}
-            className={`relative grid h-11 w-11 place-items-center rounded-full transition-transform duration-150 ease-out active:scale-[0.94] md:hidden ${
+            className={`relative grid h-11 w-11 place-items-center rounded-full transition-transform duration-150 ease-out hover:opacity-80 active:scale-[0.94] md:hidden ${
               dark ? "text-white" : "text-navy"
             }`}
           >
@@ -197,11 +263,15 @@ export function SiteHeader() {
         {/* Scroll progress along the pill's bottom edge. */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-6 bottom-0 h-[2px] overflow-hidden rounded-full"
+          className="pointer-events-none absolute inset-x-8 bottom-0 h-px overflow-hidden rounded-full"
         >
           <span
             ref={progress}
-            className={`block h-full w-full origin-left rounded-full ${dark ? "bg-sky" : "bg-brand"}`}
+            className={`block h-full w-full origin-left rounded-full ${
+              dark
+                ? "bg-gradient-to-r from-sky/0 via-sky to-sky"
+                : "bg-gradient-to-r from-brand/0 via-brand to-brand"
+            }`}
             style={{ transform: "scaleX(0)" }}
           />
         </span>

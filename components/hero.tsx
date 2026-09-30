@@ -14,7 +14,7 @@ export function Hero() {
       data-tone="dark"
       data-header-dark=""
       data-loop=""
-      className="panel-navy rounded-b-[2rem] pb-space-xl pt-[calc(env(safe-area-inset-top)+var(--header-h)+var(--header-gap)+2.5rem)] lg:rounded-b-panel lg:pb-space-2xl lg:pt-[calc(var(--header-h)+var(--header-gap)+4.5rem)]"
+      className="panel-navy panel-hero rounded-b-[2rem] pb-space-xl pt-[calc(env(safe-area-inset-top)+var(--header-h)+var(--header-gap)+2.5rem)] lg:rounded-b-panel lg:pb-space-2xl lg:pt-[calc(var(--header-h)+var(--header-gap)+4.5rem)]"
     >
       {/* Growth chart rising from the panel floor: the logo's bars, huge and faint. */}
       <GrowthBars
@@ -23,7 +23,7 @@ export function Hero() {
       />
       <div className="container-page grid items-center gap-x-space-xl gap-y-space-xl lg:grid-cols-[1.08fr_0.92fr]">
         <div className="text-center lg:text-left">
-          <p className="inline-flex items-center gap-2.5 rounded-full bg-white/[0.06] py-1.5 pl-2 pr-3.5 font-mono text-label uppercase text-sky ring-1 ring-inset ring-white/10">
+          <p className="inline-flex items-center gap-2.5 rounded-full bg-white/[0.06] py-1.5 pl-2 pr-3.5 font-mono text-label uppercase text-white/70 ring-1 ring-inset ring-white/10">
             <span className="relative grid h-5 w-5 place-items-center">
               <span className="ripple loop absolute h-2 w-2 rounded-full bg-sky/50" />
               <span className="h-2 w-2 rounded-full bg-sky" />
