@@ -459,7 +459,6 @@ export const footer = {
 } as const;
 
 export const mobileBar = {
-  price: "$297/month",
   note: "7-day free trial",
   cta: "Start free trial",
 } as const;
