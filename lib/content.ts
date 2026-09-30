@@ -425,13 +425,14 @@ export const trial = {
   formTitle: "Start your free trial",
   labels: {
     name: "Your name",
-    business: "Business name",
+    business: "Business type",
     phone: "Mobile phone",
     email: "Email",
     notes: "Anything we should know?",
     optional: "Optional",
   },
   placeholders: {
+    business: "Roofing, HVAC, plumbing…",
     phone: "(555) 123-4567",
     email: "you@company.com",
     notes: "Your trade, service area, busiest season…",

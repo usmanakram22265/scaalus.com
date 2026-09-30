@@ -164,7 +164,8 @@ export function TrialForm() {
           <Field
             name="business"
             label={trial.labels.business}
-            autoComplete="organization"
+            autoComplete="off"
+            placeholder={trial.placeholders.business}
             enterKeyHint="next"
             defaultValue={values.business}
             error={errors.business}

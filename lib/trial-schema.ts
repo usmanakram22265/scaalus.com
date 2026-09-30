@@ -25,7 +25,7 @@ export const trialSchema = z
     business: z
       .string()
       .trim()
-      .min(2, "Enter your business name")
+      .min(2, "Enter your business type")
       .max(120, "Keep it under 120 characters"),
     phone: z
       .string()
