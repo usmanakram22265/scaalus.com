@@ -37,23 +37,23 @@ export function DoneForYou() {
             {included.groups.map((group, i) => (
               <li
                 key={group.title}
-                className="relative p-6 sm:border-navy/[0.07] lg:border-r lg:last:border-r-0 sm:[&:nth-child(-n+2)]:border-b lg:[&:nth-child(-n+2)]:border-b-0 sm:[&:nth-child(odd)]:border-r"
+                className="relative p-5 sm:border-navy/[0.07] sm:p-6 lg:border-r lg:last:border-r-0 sm:[&:nth-child(-n+2)]:border-b lg:[&:nth-child(-n+2)]:border-b-0 sm:[&:nth-child(odd)]:border-r"
               >
-                <div className="flex items-center justify-between lg:justify-center">
+                <div className="flex items-center gap-3 lg:flex-col lg:gap-0">
                   <span
                     className="pop icon-chip relative"
                     style={{ "--d": `${200 + i * 160}ms` } as CSSProperties}
                   >
                     <Icon name={group.icon} size={20} strokeWidth={2} />
                   </span>
-                  <span className="font-mono text-label text-ink-muted lg:absolute lg:right-6 lg:top-6">
+                  <h3 className="text-title lg:mt-5 lg:text-center">
+                    {group.title}
+                  </h3>
+                  <span className="ml-auto font-mono text-label text-ink-muted lg:absolute lg:right-6 lg:top-6 lg:ml-0">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="mt-5 text-title lg:text-center">
-                  {group.title}
-                </h3>
-                <ul className="mt-4 grid gap-2.5">
+                <ul className="mt-3.5 grid gap-2.5 lg:mt-4">
                   {group.items.map((item) => (
                     <li
                       key={item}

@@ -159,11 +159,11 @@ export function Problem() {
               key={card.title}
               data-reveal=""
               style={{ "--i": i } as CSSProperties}
-              className="card lift flex flex-col gap-5 p-5 sm:flex-row sm:items-center sm:p-6"
+              className="card lift flex items-center gap-4 p-4 sm:gap-5 sm:p-6"
             >
               <div
                 aria-hidden="true"
-                className="panel-stone h-28 shrink-0 overflow-hidden rounded-2xl sm:h-32 sm:w-36"
+                className="panel-stone h-24 w-24 shrink-0 overflow-hidden rounded-2xl sm:h-32 sm:w-36"
               >
                 <Visual index={i} />
               </div>

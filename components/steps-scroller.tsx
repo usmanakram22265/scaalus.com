@@ -255,7 +255,7 @@ export function StepsScroller() {
             <li
               key={item.title}
               data-step={i}
-              className="card relative p-5 sm:p-6 lg:flex lg:min-h-[34vh] lg:items-center lg:bg-transparent lg:p-0 lg:pl-20 lg:shadow-none"
+              className="card relative p-4 sm:p-6 lg:flex lg:min-h-[34vh] lg:items-center lg:bg-transparent lg:p-0 lg:pl-20 lg:shadow-none"
             >
               <span
                 className={`absolute left-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full font-mono text-[0.8125rem] font-medium transition-transform duration-300 ease-out lg:grid ${
@@ -285,7 +285,7 @@ export function StepsScroller() {
               {/* Inline visual (mobile/tablet) */}
               <div
                 aria-hidden="true"
-                className="panel-stone mt-5 h-60 overflow-hidden rounded-2xl p-4 lg:hidden"
+                className="panel-stone mt-4 h-48 overflow-hidden rounded-2xl p-3 sm:h-60 sm:p-4 lg:hidden"
               >
                 <Visual active={seen[i] ?? false} />
               </div>

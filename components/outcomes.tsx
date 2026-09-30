@@ -30,7 +30,7 @@ function CalendarVisual() {
   const filled = [1, 3, 5, 6, 8, 10, 11, 13];
   return (
     <div className="w-full max-w-[20rem]">
-      <div className="grid grid-cols-5 gap-1.5 pb-2">
+      <div className="grid grid-cols-5 gap-1.5 pb-1.5 sm:pb-2">
         {v.days.map((d) => (
           <span
             key={d}
@@ -42,7 +42,10 @@ function CalendarVisual() {
       </div>
       <div className="grid grid-cols-5 gap-1.5">
         {Array.from({ length: 15 }, (_, i) => (
-          <span key={i} className="relative h-8 rounded-lg bg-white/[0.06]">
+          <span
+            key={i}
+            className="relative h-6 rounded-lg bg-white/[0.06] sm:h-8"
+          >
             {filled.includes(i) ? (
               <Pop
                 d={250 + filled.indexOf(i) * 90}
@@ -236,13 +239,13 @@ export function Outcomes() {
                   <span aria-hidden="true" className="spotlight" />
                   <div
                     aria-hidden="true"
-                    className={`relative grid h-44 place-items-center overflow-hidden rounded-[1.1rem] p-5 ${
+                    className={`relative grid h-36 place-items-center overflow-hidden rounded-[1.1rem] p-4 sm:h-44 sm:p-5 ${
                       darkTiles.has(i) ? "panel-navy" : "panel-stone"
                     }`}
                   >
                     <Visual />
                   </div>
-                  <div className="relative px-4 pb-4 pt-5">
+                  <div className="relative px-3 pb-3 pt-4 sm:px-4 sm:pb-4 sm:pt-5">
                     <h3 className="text-title">{item.title}</h3>
                     <p className="mt-1.5 text-ink-muted">{item.body}</p>
                   </div>

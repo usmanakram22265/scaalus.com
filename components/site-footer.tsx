@@ -8,11 +8,11 @@ const link =
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden pb-[calc(5.5rem+var(--safe-bottom))] pt-space-xl md:pb-0">
-      <div className="container-page grid gap-space-lg md:grid-cols-[1.4fr_1fr_1fr]">
+    <footer className="pb-safe relative overflow-hidden pt-space-lg md:pt-space-xl">
+      <div className="container-page grid gap-x-space-md gap-y-space-md md:grid-cols-[1.4fr_1fr_1fr] md:gap-space-lg">
         <div>
           <Logo height={28} className="h-7 w-auto" />
-          <p className="mt-space-sm max-w-[20rem] text-ink-muted">
+          <p className="mt-space-xs max-w-[20rem] text-small text-ink-muted md:mt-space-sm md:text-body">
             {site.promise}
           </p>
         </div>
@@ -20,7 +20,7 @@ export function SiteFooter() {
           <p className="font-mono text-label uppercase text-ink-muted">
             {footer.navTitle}
           </p>
-          <ul className="mt-space-xs">
+          <ul className="mt-space-2xs grid grid-cols-2 gap-x-space-md md:mt-space-xs md:grid-cols-1">
             {nav.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className={link}>
@@ -39,7 +39,7 @@ export function SiteFooter() {
           <p className="font-mono text-label uppercase text-ink-muted">
             {footer.contactTitle}
           </p>
-          <address className="mt-space-xs not-italic">
+          <address className="mt-space-2xs flex flex-wrap gap-x-space-md not-italic md:mt-space-xs md:block">
             <a href={site.phone.href} className={link}>
               <Icon name="phone" size={15} />
               {site.phone.display}
@@ -52,8 +52,8 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="container-page mt-space-lg">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-t border-navy/10 pt-space-md">
+      <div className="container-page mt-space-md md:mt-space-lg">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-navy/10 pt-space-sm md:pt-space-md">
           <p className="text-[0.8125rem] text-ink-muted">
             © {new Date().getFullYear()} {site.name}. {footer.legal}
           </p>
@@ -72,15 +72,13 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized wordmark, cropped at the baseline and fading out. */}
-      <div
+      {/* Oversized wordmark in solid Navy, sitting on the very bottom edge. */}
+      <p
         aria-hidden="true"
-        className="pointer-events-none mt-space-lg h-[clamp(3.25rem,15vw,12.5rem)] select-none overflow-hidden [mask-image:linear-gradient(180deg,#000_30%,transparent)]"
+        className="pointer-events-none mt-space-sm select-none pb-[0.03em] text-center font-display text-[clamp(4.75rem,24vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-navy md:mt-space-md"
       >
-        <p className="text-center font-display text-[clamp(5rem,22vw,19rem)] font-semibold leading-[0.8] tracking-[-0.06em] text-navy/[0.06]">
-          {site.name.toLowerCase()}
-        </p>
-      </div>
+        {site.name.toLowerCase()}
+      </p>
     </footer>
   );
 }

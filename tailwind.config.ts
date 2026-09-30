@@ -81,10 +81,10 @@ const config: Config = {
         "space-sm": "1rem",
         "space-md": "1.5rem",
         "space-lg": "2.5rem",
-        "space-xl": "4rem",
-        "space-2xl": "6rem",
+        "space-xl": "clamp(2.5rem, 1.6rem + 2.8vw, 4rem)",
+        "space-2xl": "clamp(3.5rem, 2.3rem + 4vw, 6rem)",
         "space-3xl": "9rem",
-        section: "clamp(5.5rem, 4rem + 6vw, 8.5rem)",
+        section: "clamp(4rem, 0.4rem + 9.6vw, 8.5rem)",
         header: "4rem",
       },
       maxWidth: {
