@@ -233,11 +233,6 @@
   }
 }
 
-.animate-rise {
-  animation: rise 700ms var(--ease-out) both;
-  animation-delay: calc(var(--i, 0) * 70ms + 60ms);
-}
-
 /*
  * Scroll reveal. Content is only hidden once JS has marked <html class="js">,
  * so visitors without JS still see everything. RevealObserver sets data-shown.
@@ -285,7 +280,6 @@ summary::-webkit-details-marker {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-rise,
   details[open] > .faq-body {
     animation: none;
   }

@@ -1,38 +1,32 @@
 "use client";
 
-import {
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
+import { useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 import { Icon } from "./ui/icons";
 
 /*
  * Illustrative story (generic labels, no real customers or stats):
  * missed call → automatic text back → reply → offer → yes → job lands on the calendar.
- * Steps advance with CSS transitions (interruptible), pause offscreen / in hidden tabs,
- * have a visible pause control, and show the final frame under reduced motion.
+ * Starts mid-thread so the phone is never empty, plays from load at any viewport,
+ * pauses in hidden tabs, has a visible pause control, and shows the final frame
+ * under reduced motion.
  */
+const START = 2;
 const FINAL = 6;
 // How long each step holds before the next one (ms). Index = current step.
 const HOLD = [400, 1300, 1600, 1500, 1300, 1100, 3600];
 
 function useStory() {
-  const [step, setStep] = useState(FINAL);
+  const [step, setStep] = useState(START);
   const [playing, setPlaying] = useState(true);
-  const [inView, setInView] = useState(false);
   const [pageVisible, setPageVisible] = useState(true);
   const [reduced, setReduced] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
 
-  // Before first paint: start the story from the top unless motion is reduced.
+  // Reduced motion: show the finished story, no loop.
   useLayoutEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
     const apply = () => {
       setReduced(query.matches);
-      setStep(query.matches ? FINAL : 0);
+      setStep(query.matches ? FINAL : START);
     };
     apply();
     query.addEventListener("change", apply);
@@ -40,34 +34,24 @@ function useStory() {
   }, []);
 
   useEffect(() => {
-    const el = root.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.2 },
-    );
-    observer.observe(el);
     const onVisibility = () =>
       setPageVisible(document.visibilityState === "visible");
     document.addEventListener("visibilitychange", onVisibility);
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", onVisibility);
-    };
+    return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
 
-  const running = playing && inView && pageVisible && !reduced;
+  const running = playing && pageVisible && !reduced;
 
   useEffect(() => {
     if (!running) return;
     const id = window.setTimeout(
-      () => setStep((s) => (s >= FINAL ? 0 : s + 1)),
+      () => setStep((s) => (s >= FINAL ? START : s + 1)),
       HOLD[step],
     );
     return () => window.clearTimeout(id);
   }, [running, step]);
 
-  return { root, step, playing, setPlaying, reduced };
+  return { step, playing, setPlaying, reduced };
 }
 
 function Beat({
@@ -122,11 +106,11 @@ function Bubble({
 }
 
 export function HeroDemo() {
-  const { root, step, playing, setPlaying, reduced } = useStory();
+  const { step, playing, setPlaying, reduced } = useStory();
   const booked = step >= 6;
 
   return (
-    <div ref={root} className="relative">
+    <div className="relative">
       <p className="sr-only">
         Example: a missed call at 9:42 PM gets an automatic text back. The
         customer replies, and a roof leak repair is booked on the calendar for

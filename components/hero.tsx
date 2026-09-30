@@ -1,5 +1,4 @@
 import { hero } from "@/lib/content";
-import { stagger } from "@/lib/style";
 import { HeroDemo } from "./hero-demo";
 import { ButtonLink } from "./ui/button";
 import { Glow } from "./ui/glow";
@@ -18,17 +17,10 @@ export function Hero() {
       </div>
       <div className="container-page pb-section pt-space-xl lg:pt-space-2xl">
         <div className="mx-auto max-w-[56rem] text-center">
-          <p
-            className="animate-rise mx-auto max-w-[22rem] text-small font-medium text-ink-muted sm:max-w-none"
-            style={stagger(0)}
-          >
+          <p className="mx-auto max-w-[22rem] text-small font-medium text-ink-muted sm:max-w-none">
             {hero.eyebrow}
           </p>
-          <h1
-            id="hero-title"
-            className="animate-rise mt-space-sm text-display-xl"
-            style={stagger(1)}
-          >
+          <h1 id="hero-title" className="mt-space-sm text-display-xl">
             <span className="block">
               {hero.titleStart}
               <span className="text-gradient whitespace-nowrap">
@@ -37,17 +29,13 @@ export function Hero() {
             </span>
             <span className="block text-ink-muted">{hero.titleEnd.trim()}</span>
           </h1>
-          <p
-            className="animate-rise mx-auto mt-space-md max-w-[38rem] text-lead text-ink-muted"
-            style={stagger(2)}
-          >
+          <p className="mx-auto mt-space-md max-w-[38rem] text-lead text-ink-muted">
             {hero.body}
           </p>
 
           <div
             id="hero-cta"
-            className="animate-rise mx-auto mt-space-lg flex max-w-[22rem] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center"
-            style={stagger(3)}
+            className="mx-auto mt-space-lg flex max-w-[22rem] flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center"
           >
             <ButtonLink
               href="#trial"
@@ -67,10 +55,7 @@ export function Hero() {
             </ButtonLink>
           </div>
 
-          <ul
-            className="animate-rise mt-space-md flex flex-wrap items-center justify-center gap-x-space-md gap-y-space-xs text-small text-ink-muted"
-            style={stagger(4)}
-          >
+          <ul className="mt-space-md flex flex-wrap items-center justify-center gap-x-space-md gap-y-space-xs text-small text-ink-muted">
             {hero.reassurance.map((item) => (
               <li key={item} className="inline-flex items-center gap-1.5">
                 <Icon
@@ -85,10 +70,7 @@ export function Hero() {
           </ul>
         </div>
 
-        <div
-          className="animate-rise relative isolate mt-space-xl lg:mt-space-2xl"
-          style={stagger(6)}
-        >
+        <div className="relative isolate mt-space-xl lg:mt-space-2xl">
           <Glow size={480} color="rgb(43 89 216 / 0.18)" position="center" />
           <HeroDemo />
         </div>

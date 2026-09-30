@@ -6,6 +6,8 @@ type Props = {
   /** Rendered height in px; width follows the asset's aspect ratio. */
   height?: number;
   priority?: boolean;
+  /** Fetch immediately even while hidden (for instant swaps). */
+  eager?: boolean;
   className?: string;
 };
 
@@ -20,6 +22,7 @@ export function Logo({
   tone = "color",
   height = 28,
   priority,
+  eager,
   className,
 }: Props) {
   const asset = assets[variant];
@@ -33,6 +36,7 @@ export function Logo({
       width={width}
       height={height}
       priority={priority}
+      loading={eager ? "eager" : undefined}
       className={className}
       sizes={`${width}px`}
     />

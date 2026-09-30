@@ -10,15 +10,42 @@ import { Logo } from "./ui/logo";
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // True while a dark section sits under the header's bottom edge.
+  const [overDark, setOverDark] = useState(false);
+  const header = useRef<HTMLElement>(null);
   const menuButton = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const returnFocus = useRef(true);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4);
-    onScroll();
+    const darkSections = [
+      ...document.querySelectorAll<HTMLElement>(
+        'section[data-tone="dark"], footer[data-tone="dark"]',
+      ),
+    ];
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setScrolled(window.scrollY > 4);
+      const line = (header.current?.getBoundingClientRect().bottom ?? 0) - 1;
+      setOverDark(
+        darkSections.some((section) => {
+          const r = section.getBoundingClientRect();
+          return r.top <= line && r.bottom > line;
+        }),
+      );
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -53,16 +80,22 @@ export function SiteHeader() {
   };
 
   const raised = scrolled || open;
+  // Opaque and switched instantly: the header is always exactly #FAF9F6 or #0D2847.
+  const dark = overDark && !open;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-floating pt-[env(safe-area-inset-top)]">
+    <header
+      ref={header}
+      data-tone={dark ? "dark" : "light"}
+      className="fixed inset-x-0 top-0 z-floating pt-[env(safe-area-inset-top)]"
+    >
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-surface-base/75 backdrop-blur-xl backdrop-saturate-150"
+        className={`absolute inset-0 -z-10 ${dark ? "bg-navy" : "bg-surface-base"}`}
       />
       <div
         aria-hidden="true"
-        className={`absolute inset-x-0 bottom-0 h-px bg-navy/10 transition-opacity duration-300 ease-out ${raised ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-x-0 bottom-0 h-px ${dark ? "bg-white/[0.12]" : "bg-navy/10"} transition-opacity duration-300 ease-out ${raised ? "opacity-100" : "opacity-0"}`}
       />
 
       <div className="container-page flex h-header items-center justify-between gap-4 lg:h-header-lg">
@@ -72,7 +105,17 @@ export function SiteHeader() {
           className="-m-2 rounded-xl p-2 transition-transform duration-150 ease-out active:scale-[0.97]"
           aria-label="Scaalus, back to top"
         >
-          <Logo height={26} priority className="h-[26px] w-auto lg:h-7" />
+          <Logo
+            height={26}
+            priority
+            className={`h-[26px] w-auto lg:h-7 ${dark ? "hidden" : ""}`}
+          />
+          <Logo
+            tone="white"
+            height={26}
+            eager
+            className={`h-[26px] w-auto lg:h-7 ${dark ? "" : "hidden"}`}
+          />
         </Link>
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
@@ -80,7 +123,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full px-3.5 py-2 text-small font-medium text-navy opacity-70 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-100"
+              className={`rounded-full px-3.5 py-2 text-small font-medium ${dark ? "text-white" : "text-navy"} opacity-70 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-100`}
             >
               {item.label}
             </Link>
@@ -105,7 +148,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="relative -mr-2 grid h-11 w-11 place-items-center rounded-full text-navy transition-transform duration-150 ease-out active:scale-[0.94] md:hidden"
+            className={`relative -mr-2 grid h-11 w-11 place-items-center rounded-full ${dark ? "text-white" : "text-navy"} transition-transform duration-150 ease-out active:scale-[0.94] md:hidden`}
           >
             <Icon
               name="menu"
@@ -137,7 +180,7 @@ export function SiteHeader() {
         id="mobile-menu"
         ref={panel}
         inert={!open}
-        className={`absolute inset-x-0 top-full origin-top overscroll-contain rounded-b-card bg-surface-base/95 shadow-floating backdrop-blur-xl transition-[opacity,transform] ease-out md:hidden ${
+        className={`absolute inset-x-0 top-full origin-top overscroll-contain rounded-b-card bg-surface-base shadow-floating transition-[opacity,transform] ease-out md:hidden ${
           open
             ? "translate-y-0 opacity-100 duration-[220ms]"
             : "pointer-events-none -translate-y-2 opacity-0 duration-150"
