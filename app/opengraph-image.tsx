@@ -27,7 +27,7 @@ export default async function Image() {
         flexDirection: "column",
         justifyContent: "space-between",
         padding: 80,
-        backgroundColor: "#0D1726",
+        backgroundColor: "#0D2847",
         backgroundImage:
           "radial-gradient(60% 60% at 90% 0%, rgba(110,147,240,0.30), transparent 70%), radial-gradient(60% 70% at 0% 100%, rgba(18,52,153,0.6), transparent 72%)",
       }}

@@ -25,9 +25,7 @@ const base =
   "hover:before:opacity-100 active:before:opacity-100 disabled:pointer-events-none disabled:opacity-70";
 
 const variants: Record<Variant, string> = {
-  // Deep gradient; hover fades in a brighter Royal→Brand layer (opacity only).
-  primary:
-    "sheen bg-deep-grad text-white shadow-cta before:bg-[linear-gradient(165deg,#2B59D8,#123499)]",
+  primary: "sheen bg-brand text-white shadow-cta before:bg-royal",
   secondary:
     "bg-surface-elevated text-navy shadow-elevated before:bg-surface-card",
   "ghost-dark":

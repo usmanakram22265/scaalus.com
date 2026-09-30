@@ -25,18 +25,18 @@ const look: Record<Kind, { icon: IconName; card: string; chip: string }> = {
   },
   booked: {
     icon: "calendarCheck",
-    card: "bg-deep-grad text-white shadow-cta",
+    card: "bg-brand text-white shadow-cta",
     chip: "bg-white/20 text-white",
   },
   reply: {
     icon: "zap",
     card: "bg-surface-elevated text-navy shadow-elevated",
-    chip: "bg-deep-grad text-white",
+    chip: "bg-brand text-white",
   },
   followup: {
     icon: "repeat",
     card: "bg-surface-elevated text-navy shadow-elevated",
-    chip: "bg-deep-grad text-white",
+    chip: "bg-brand text-white",
   },
   review: {
     icon: "star",
@@ -127,7 +127,7 @@ export function WeekCompare() {
           >
             <span className="col-start-1 row-start-1 rounded-full bg-navy" />
             <span
-              className={`bg-deep-grad col-start-1 row-start-1 rounded-full shadow-cta transition-opacity duration-500 ease-in-out ${
+              className={`col-start-1 row-start-1 rounded-full bg-brand shadow-cta transition-opacity duration-500 ease-in-out ${
                 withScaalus ? "opacity-100" : "opacity-0"
               }`}
             />
@@ -195,7 +195,7 @@ export function WeekCompare() {
           <span
             className={`grid h-5 w-5 place-items-center rounded-full transition-transform duration-300 ease-out ${
               withScaalus
-                ? "bg-deep-grad scale-100 text-white"
+                ? "scale-100 bg-brand text-white"
                 : "scale-90 bg-navy/10 text-ink-muted"
             }`}
             style={{ "--i": 0 } as CSSProperties}

@@ -174,7 +174,7 @@ export function TrialForm() {
             id="trial-contact-hint"
             className="-mb-1 flex items-center gap-2 text-[0.8125rem] text-ink-muted sm:col-span-2"
           >
-            <Icon name="phone" size={14} className="text-royal" />
+            <Icon name="phone" size={14} className="text-brand" />
             {trial.contactHint}
           </p>
           <Field
@@ -263,7 +263,7 @@ export function TrialForm() {
         {done ? (
           <div className="max-w-[22rem]">
             <span
-              className="bg-deep-grad mx-auto grid h-16 w-16 place-items-center rounded-full text-white shadow-cta"
+              className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-brand text-white shadow-cta"
               style={{ animation: "pop-in 500ms var(--ease-out) both" }}
             >
               <Icon name="check" size={28} strokeWidth={2.5} />

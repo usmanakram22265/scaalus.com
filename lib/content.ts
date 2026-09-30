@@ -39,7 +39,6 @@ export const header = {
   openMenu: "Open menu",
   closeMenu: "Close menu",
   skip: "Skip to content",
-  call: "Call Scaalus",
 } as const;
 
 export const hero = {

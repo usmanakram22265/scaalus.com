@@ -42,7 +42,7 @@ export function MobileCtaBar() {
           : "pointer-events-none translate-y-[110%] opacity-0 duration-200"
       }`}
     >
-      <div className="flex items-center justify-between gap-3 rounded-full bg-midnight p-1.5 pl-5 shadow-floating ring-1 ring-inset ring-white/10">
+      <div className="flex items-center justify-between gap-3 rounded-full bg-navy p-1.5 pl-5 shadow-floating ring-1 ring-inset ring-white/10">
         <p className="text-[0.8125rem] leading-tight text-white/70">
           <span className="block font-semibold text-white">
             {mobileBar.price}

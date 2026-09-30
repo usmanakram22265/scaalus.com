@@ -5,11 +5,7 @@ import { SectionHeader } from "./ui/section";
 
 export function Faq() {
   return (
-    <section
-      id="faq"
-      aria-labelledby="faq-title"
-      className="cv-auto pb-section"
-    >
+    <section id="faq" aria-labelledby="faq-title" className="pb-section">
       <div className="container-page grid gap-space-xl lg:grid-cols-[0.8fr_1.2fr] lg:gap-space-2xl">
         <div className="lg:sticky lg:top-[calc(var(--header-h)+var(--header-gap)+3rem)] lg:self-start">
           <SectionHeader
@@ -33,7 +29,7 @@ export function Faq() {
                 href={site.phone.href}
                 className="group flex min-h-12 items-center gap-3 rounded-xl bg-surface-card px-3 font-medium text-navy transition-transform duration-150 ease-out hover:bg-surface-base active:scale-[0.98]"
               >
-                <Icon name="phone" size={17} className="text-royal" />
+                <Icon name="phone" size={17} className="text-brand" />
                 {site.phone.display}
                 <Icon
                   name="arrowRight"
@@ -45,7 +41,7 @@ export function Faq() {
                 href={`mailto:${site.email}`}
                 className="group flex min-h-12 items-center gap-3 rounded-xl bg-surface-card px-3 font-medium text-navy transition-transform duration-150 ease-out hover:bg-surface-base active:scale-[0.98]"
               >
-                <Icon name="mail" size={17} className="text-royal" />
+                <Icon name="mail" size={17} className="text-brand" />
                 {site.email}
                 <Icon
                   name="arrowRight"

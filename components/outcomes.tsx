@@ -37,7 +37,7 @@ function CalendarVisual() {
           {filled.has(i) ? (
             <Pop
               d={250 + [...filled].indexOf(i) * 90}
-              className="bg-deep-grad absolute inset-0 rounded-lg shadow-cta"
+              className="absolute inset-0 rounded-lg bg-brand shadow-cta"
             />
           ) : null}
         </span>
@@ -54,7 +54,7 @@ function PhoneVisual() {
       </span>
       <Pop
         d={400}
-        className="bg-deep-grad absolute -right-3 -top-3 grid h-8 w-8 place-items-center rounded-full text-white shadow-cta ring-4 ring-surface-card"
+        className="absolute -right-3 -top-3 grid h-8 w-8 place-items-center rounded-full bg-brand text-white shadow-cta ring-4 ring-surface-card"
       >
         <Icon name="check" size={15} strokeWidth={2.75} />
       </Pop>
@@ -84,7 +84,7 @@ function ReplyVisual() {
       </Pop>
       <Pop
         d={550}
-        className="bg-deep-grad ml-auto flex items-center gap-1.5 rounded-[1rem] rounded-br-md px-3 py-2 text-[0.8125rem] font-medium text-white shadow-cta"
+        className="ml-auto flex items-center gap-1.5 rounded-[1rem] rounded-br-md bg-brand px-3 py-2 text-[0.8125rem] font-medium text-white shadow-cta"
       >
         <Icon name="zap" size={12} strokeWidth={2.5} />
         {v.reply}
@@ -128,7 +128,7 @@ function StarsVisual() {
           />
           <Pop
             d={250 + i * 110}
-            className="absolute inset-0 grid place-items-center text-royal"
+            className="absolute inset-0 grid place-items-center text-brand"
           >
             <Icon name="star" size={30} strokeWidth={1.5} fill="currentColor" />
           </Pop>
@@ -157,7 +157,7 @@ function MapVisual() {
       <span className="absolute left-[82%] top-[24%] h-2.5 w-2.5 rounded-full bg-navy/20" />
       <Pop
         d={450}
-        className="pin absolute left-[calc(52%-17px)] top-[22%] text-royal"
+        className="pin absolute left-[calc(52%-17px)] top-[22%] text-brand"
       >
         <Icon
           name="mapPin"
@@ -187,7 +187,7 @@ export function Outcomes() {
     <section
       id="results"
       aria-labelledby="results-title"
-      className="cv-auto py-section"
+      className="py-section"
     >
       <div className="container-page">
         <SectionHeader

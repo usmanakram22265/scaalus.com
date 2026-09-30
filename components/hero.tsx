@@ -12,7 +12,7 @@ export function Hero() {
       id="top"
       aria-labelledby="hero-title"
       data-tone="dark"
-
+      data-header-dark=""
       data-loop=""
       className="panel-navy rounded-b-[2rem] pb-space-xl pt-[calc(env(safe-area-inset-top)+var(--header-h)+var(--header-gap)+2.5rem)] lg:rounded-b-panel lg:pb-space-2xl lg:pt-[calc(var(--header-h)+var(--header-gap)+4.5rem)]"
     >

@@ -8,7 +8,7 @@ const link =
 
 export function SiteFooter() {
   return (
-    <footer className="cv-auto relative overflow-hidden pb-[calc(6.5rem+var(--safe-bottom))] pt-space-xl md:pb-space-lg">
+    <footer className="relative overflow-hidden pb-[calc(6.5rem+var(--safe-bottom))] pt-space-xl md:pb-space-lg">
       <div className="container-page grid gap-space-lg md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <Logo height={28} className="h-7 w-auto" />

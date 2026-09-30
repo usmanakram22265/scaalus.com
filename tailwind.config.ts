@@ -19,9 +19,7 @@ const config: Config = {
       transparent: "transparent",
       current: "currentColor",
       white: "#FFFFFF",
-      midnight: "#0D1726",
       navy: "#0D2847",
-      "navy-soft": "#13294D",
       deep: "#0A2472",
       royal: "#123499",
       brand: "#2B59D8",
@@ -108,7 +106,7 @@ const config: Config = {
         // On navy: deep drop + a 1px top highlight so cards read as lit from above.
         "on-navy":
           "0 24px 60px -16px rgb(3 10 30 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.10), 0 0 0 1px rgb(255 255 255 / 0.08)",
-        cta: "0 1px 2px rgb(10 36 114 / 0.3), 0 10px 26px -10px rgb(10 36 114 / 0.65), inset 0 1px 0 rgb(110 147 240 / 0.35)",
+        cta: "0 1px 2px rgb(10 36 114 / 0.25), 0 10px 28px -8px rgb(43 89 216 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.22)",
         header:
           "0 1px 2px rgb(13 40 71 / 0.06), 0 10px 30px -12px rgb(13 40 71 / 0.18), 0 0 0 1px rgb(13 40 71 / 0.06)",
       },
