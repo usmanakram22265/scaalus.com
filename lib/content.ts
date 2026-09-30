@@ -39,6 +39,7 @@ export const header = {
   openMenu: "Open menu",
   closeMenu: "Close menu",
   skip: "Skip to content",
+  call: "Call",
 } as const;
 
 export const hero = {

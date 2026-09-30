@@ -167,15 +167,15 @@ export function SiteHeader() {
           aria-label={copy.home}
         >
           <Logo
-            height={24}
+            height={32}
             priority
-            className={`h-6 w-auto lg:h-[26px] ${dark ? "hidden" : ""}`}
+            className={`h-7 w-auto lg:h-8 ${dark ? "hidden" : ""}`}
           />
           <Logo
             tone="white"
-            height={24}
+            height={32}
             priority
-            className={`h-6 w-auto lg:h-[26px] ${dark ? "" : "hidden"}`}
+            className={`h-7 w-auto lg:h-8 ${dark ? "" : "hidden"}`}
           />
         </Link>
 
@@ -212,23 +212,30 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-1.5">
+          {/* Call: a filled icon with a soft ripple, so it's easy to spot. */}
           <a
             href={site.phone.href}
-            aria-label={site.phone.display}
-            className={`group hidden h-10 items-center gap-2.5 rounded-full pl-1 pr-3 text-small font-medium transition-[opacity,transform] duration-200 ease-out hover:opacity-100 active:scale-[0.97] lg:inline-flex ${
-              dark ? "text-white opacity-85" : "text-navy opacity-80"
+            aria-label={`${copy.call} ${site.phone.display}`}
+            className={`group inline-flex h-11 items-center gap-2.5 rounded-full pr-0 text-small font-semibold transition-[opacity,transform] duration-200 ease-out hover:opacity-90 active:scale-[0.96] lg:pr-3 ${
+              dark ? "text-white" : "text-navy"
             }`}
           >
-            <span
-              className={`grid h-8 w-8 place-items-center rounded-full transition-transform duration-200 ease-out group-hover:-rotate-12 ${
-                dark
-                  ? "bg-white/[0.08] text-sky ring-1 ring-inset ring-white/10"
-                  : "bg-surface-card text-brand"
-              }`}
-            >
-              <Icon name="phone" size={14} strokeWidth={2} />
+            <span className="relative grid h-10 w-10 place-items-center">
+              <span
+                aria-hidden="true"
+                className={`ripple absolute inset-0 rounded-full ${dark ? "bg-sky/40" : "bg-brand/25"}`}
+              />
+              <span
+                className={`relative grid h-10 w-10 place-items-center rounded-full transition-transform duration-200 ease-out group-hover:-rotate-12 ${
+                  dark
+                    ? "bg-sky text-navy shadow-[0_6px_18px_-6px_rgb(110_147_240/0.8)]"
+                    : "bg-brand text-white shadow-cta"
+                }`}
+              >
+                <Icon name="phone" size={17} strokeWidth={2.25} />
+              </span>
             </span>
-            <span className="hidden xl:inline">{site.phone.display}</span>
+            <span className="hidden lg:inline">{site.phone.display}</span>
           </a>
           <span
             aria-hidden="true"
