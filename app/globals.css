@@ -22,7 +22,7 @@
 /*
  * Fluid scale. From 1024px up these are the desktop values, unchanged.
  * Below 1024px the whole page scales down with the screen (no breakpoint
- * jumps): the root size eases from 16px to ~14.5px at 390px, and headings
+ * jumps): the root size eases from 16px to ~13.75px at 390px, and headings
  * and section spacing follow a steeper line so phones keep desktop's
  * proportions. Each phone formula meets the desktop value exactly at 1024px.
  */
@@ -38,35 +38,35 @@
 }
 @media (max-width: 1023.98px) {
   html {
-    font-size: clamp(88%, calc(84.85% + 0.2366vw), 100%);
+    font-size: clamp(84%, calc(77.287% + 0.3549vw), 100%);
   }
   :root {
     --fs-display-2xl: min(
       clamp(2.5rem, 1.55rem + 4.2vw, 4.75rem),
-      calc(0.854rem + 5.287vw)
+      calc(0.546rem + 5.768vw)
     );
     --fs-display-xl: min(
       clamp(2.125rem, 1.5rem + 2.9vw, 3.75rem),
-      calc(0.779rem + 4.027vw)
+      calc(0.463rem + 4.52vw)
     );
     --fs-display-lg: min(
       clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem),
-      calc(0.924rem + 2.463vw)
+      calc(0.753rem + 2.73vw)
     );
-    --space-section: min(
-      clamp(4rem, 0.4rem + 9.6vw, 8.5rem),
-      calc(0.491rem + 9.458vw)
+    --space-section: max(
+      1.75rem,
+      min(clamp(4rem, 0.4rem + 9.6vw, 8.5rem), calc(-0.767rem + 11.424vw))
     );
     --space-2xl: min(
       clamp(3.5rem, 2.3rem + 4vw, 6rem),
-      calc(0.996rem + 6.042vw)
+      calc(0.048rem + 7.522vw)
     );
     --space-xl: min(
       clamp(2.5rem, 1.6rem + 2.8vw, 4rem),
-      calc(0.871rem + 3.942vw)
+      calc(0.172rem + 5.033vw)
     );
-    --space-lg: min(2.5rem, calc(1.281rem + 1.905vw));
-    --space-md: min(1.5rem, calc(0.935rem + 0.883vw));
+    --space-lg: min(2.5rem, calc(0.622rem + 2.934vw));
+    --space-md: min(1.5rem, calc(0.635rem + 1.352vw));
   }
 }
 
@@ -317,6 +317,16 @@
       0 6px 16px -6px rgb(43 89 216 / 0.6),
       inset 0 1px 0 rgb(255 255 255 / 0.25);
   }
+}
+
+/* Phone swipe rows: native horizontal scroll with snap, no visible scrollbar. */
+.swipe-row {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+}
+.swipe-row::-webkit-scrollbar {
+  display: none;
 }
 
 /* ---------- Motion ---------- */

@@ -224,7 +224,7 @@ function TrialFormInner() {
               defaultValue={values.notes}
               aria-invalid={errors.notes ? true : undefined}
               aria-describedby={errors.notes ? "trial-notes-error" : undefined}
-              className={`${inputClass} min-h-[6.5rem] resize-y py-3`}
+              className={`${inputClass} min-h-[4.5rem] resize-y py-3 sm:min-h-[6.5rem]`}
             />
             <ErrorText id="trial-notes-error">{errors.notes}</ErrorText>
           </div>

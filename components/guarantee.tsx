@@ -72,7 +72,7 @@ export function Guarantee() {
                   key={point.title}
                   data-reveal=""
                   style={{ "--i": i + 1 } as CSSProperties}
-                  className="card flex items-center gap-4 p-4"
+                  className="card flex items-center gap-3 p-3 sm:gap-4 sm:p-4"
                 >
                   <span className="icon-chip">
                     <Icon name={point.icon} size={20} strokeWidth={2} />

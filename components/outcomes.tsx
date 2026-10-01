@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 import { results } from "@/lib/content";
 import { Icon } from "./ui/icons";
 import { SectionHeader } from "./ui/section";
+import { SwipeDots } from "./ui/swipe-dots";
 
 const v = results.visual;
 
@@ -225,7 +226,11 @@ export function Outcomes() {
             title={results.title}
             highlight={results.highlight}
           />
-          <ul className="mt-space-xl grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Phones: one swipeable row. Tablet/desktop: the bento grid. */}
+          <ul
+            id="results-row"
+            className="swipe-row mt-space-xl grid gap-3 max-sm:-mx-5 max-sm:-my-3 max-sm:flex max-sm:snap-x max-sm:snap-mandatory max-sm:scroll-px-5 max-sm:overflow-x-auto max-sm:px-5 max-sm:py-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3"
+          >
             {results.items.map((item, i) => {
               const Visual = visuals[i] ?? PhoneVisual;
               return (
@@ -234,7 +239,7 @@ export function Outcomes() {
                   data-reveal=""
                   data-spotlight=""
                   style={{ "--i": i % 3 } as CSSProperties}
-                  className={`card lift overflow-hidden p-2 ${spans[i]}`}
+                  className={`card lift overflow-hidden p-2 max-sm:w-[80%] max-sm:shrink-0 max-sm:snap-center ${spans[i]}`}
                 >
                   <span aria-hidden="true" className="spotlight" />
                   <div
@@ -253,6 +258,7 @@ export function Outcomes() {
               );
             })}
           </ul>
+          <SwipeDots targetId="results-row" count={results.items.length} />
         </div>
       </div>
     </section>

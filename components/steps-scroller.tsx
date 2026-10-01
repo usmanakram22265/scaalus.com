@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { steps } from "@/lib/content";
 import { Icon } from "./ui/icons";
+import { SwipeDots } from "./ui/swipe-dots";
 
 const v = steps.visual;
 
@@ -237,62 +238,72 @@ export function StepsScroller() {
       </div>
 
       {/* Steps */}
-      <ol ref={list} className="relative grid gap-5 lg:gap-0">
-        <span
-          aria-hidden="true"
-          className="absolute bottom-0 left-[1.375rem] top-0 hidden w-[2px] overflow-hidden rounded-full bg-navy/10 lg:block"
+      <div className="min-w-0">
+        {/* Phones: the steps are one swipeable row. */}
+        <ol
+          ref={list}
+          id="steps-row"
+          className="swipe-row relative grid gap-3 max-sm:-mx-5 max-sm:-my-3 max-sm:flex max-sm:snap-x max-sm:snap-mandatory max-sm:scroll-px-5 max-sm:overflow-x-auto max-sm:px-5 max-sm:py-3 sm:gap-5 lg:gap-0"
         >
           <span
-            ref={fill}
-            className="block h-full w-full origin-top rounded-full bg-brand"
-            style={{ transform: "scaleY(0)" }}
-          />
-        </span>
-        {steps.items.map((item, i) => {
-          const Visual = visuals[i] ?? CaptureVisual;
-          const on = active === i;
-          return (
-            <li
-              key={item.title}
-              data-step={i}
-              className="card relative p-4 sm:p-6 lg:flex lg:min-h-[34vh] lg:items-center lg:bg-transparent lg:p-0 lg:pl-20 lg:shadow-none"
-            >
-              <span
-                className={`absolute left-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full font-mono text-[0.8125rem] font-medium transition-transform duration-300 ease-out lg:grid ${
-                  on
-                    ? "scale-100 bg-brand text-white shadow-cta"
-                    : "scale-90 bg-surface-elevated text-ink-muted shadow-elevated"
-                }`}
+            aria-hidden="true"
+            className="absolute bottom-0 left-[1.375rem] top-0 hidden w-[2px] overflow-hidden rounded-full bg-navy/10 lg:block"
+          >
+            <span
+              ref={fill}
+              className="block h-full w-full origin-top rounded-full bg-brand"
+              style={{ transform: "scaleY(0)" }}
+            />
+          </span>
+          {steps.items.map((item, i) => {
+            const Visual = visuals[i] ?? CaptureVisual;
+            const on = active === i;
+            return (
+              <li
+                key={item.title}
+                data-step={i}
+                className="card relative p-4 max-sm:w-[84%] max-sm:shrink-0 max-sm:snap-center sm:p-6 lg:flex lg:min-h-[34vh] lg:items-center lg:bg-transparent lg:p-0 lg:pl-20 lg:shadow-none"
               >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <div
-                  className={`flex items-center gap-3 transition-[opacity,transform] duration-300 ease-out lg:origin-left ${on ? "" : "lg:scale-90 lg:opacity-40"}`}
+                <span
+                  className={`absolute left-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full font-mono text-[0.8125rem] font-medium transition-transform duration-300 ease-out lg:grid ${
+                    on
+                      ? "scale-100 bg-brand text-white shadow-cta"
+                      : "scale-90 bg-surface-elevated text-ink-muted shadow-elevated"
+                  }`}
                 >
-                  <span className="icon-chip">
-                    <Icon name={item.icon} size={20} strokeWidth={2} />
-                  </span>
-                  <span className="font-mono text-label uppercase text-ink-muted lg:hidden">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <div
+                    className={`flex items-center gap-3 transition-[opacity,transform] duration-300 ease-out lg:origin-left ${on ? "" : "lg:scale-90 lg:opacity-40"}`}
+                  >
+                    <span className="icon-chip">
+                      <Icon name={item.icon} size={20} strokeWidth={2} />
+                    </span>
+                    <span className="font-mono text-label uppercase text-ink-muted lg:hidden">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-[clamp(1.375rem,1.2rem+0.8vw,1.75rem)] font-semibold leading-tight tracking-[-0.03em]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 max-w-[28rem] text-ink-muted">
+                    {item.body}
+                  </p>
                 </div>
-                <h3 className="mt-4 text-[clamp(1.375rem,1.2rem+0.8vw,1.75rem)] font-semibold leading-tight tracking-[-0.03em]">
-                  {item.title}
-                </h3>
-                <p className="mt-2 max-w-[28rem] text-ink-muted">{item.body}</p>
-              </div>
-              {/* Inline visual (mobile/tablet) */}
-              <div
-                aria-hidden="true"
-                className="panel-stone mt-3 grid min-h-40 overflow-hidden rounded-2xl px-3 py-4 sm:mt-4 sm:h-60 sm:p-4 sm:py-3 lg:hidden"
-              >
-                <Visual active={seen[i] ?? false} />
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+                {/* Inline visual (mobile/tablet) */}
+                <div
+                  aria-hidden="true"
+                  className="panel-stone mt-3 grid min-h-40 overflow-hidden rounded-2xl px-3 py-4 sm:mt-4 sm:h-60 sm:p-4 sm:py-3 lg:hidden"
+                >
+                  <Visual active={seen[i] ?? false} />
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+        <SwipeDots targetId="steps-row" count={steps.items.length} />
+      </div>
     </div>
   );
 }
