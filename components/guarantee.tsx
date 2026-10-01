@@ -7,7 +7,10 @@ import { Eyebrow } from "./ui/section";
 /** A slowly turning seal: the three promises on a ring around a shield. */
 function RotatingBadge() {
   return (
-    <div aria-hidden="true" className="relative mb-6 hidden h-28 w-28 lg:block">
+    <div
+      aria-hidden="true"
+      className="relative mx-auto mb-4 h-20 w-20 lg:mx-0 lg:mb-6 lg:h-28 lg:w-28"
+    >
       <svg viewBox="0 0 200 200" className="spin-badge loop h-full w-full">
         <defs>
           <path
@@ -26,7 +29,7 @@ function RotatingBadge() {
         </text>
       </svg>
       <span className="absolute inset-0 grid place-items-center">
-        <span className="icon-chip h-12 w-12 rounded-full">
+        <span className="icon-chip h-9 w-9 rounded-full lg:h-12 lg:w-12">
           <Icon name="shield" size={24} strokeWidth={2} />
         </span>
       </span>

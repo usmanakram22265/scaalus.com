@@ -4,15 +4,15 @@ import { Icon } from "./ui/icons";
 import { Logo } from "./ui/logo";
 
 const link =
-  "inline-flex min-h-[44px] items-center gap-2 text-navy opacity-70 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-50";
+  "inline-flex min-h-[44px] items-center gap-1.5 text-navy opacity-70 max-md:text-[0.875rem] md:gap-2 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-50";
 
 export function SiteFooter() {
   return (
     <footer className="pb-safe relative overflow-hidden pt-space-lg md:pt-space-xl">
-      <div className="container-page grid gap-x-space-md gap-y-space-md md:grid-cols-[1.4fr_1fr_1fr] md:gap-space-lg">
-        <div>
-          <Logo height={28} className="h-7 w-auto" />
-          <p className="mt-space-xs max-w-[20rem] text-small text-ink-muted md:mt-space-sm md:text-body">
+      <div className="container-page grid grid-cols-[minmax(0,1fr)_auto_auto] gap-x-4 gap-y-space-md max-[359px]:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr] md:gap-space-lg">
+        <div className="max-[359px]:col-span-2">
+          <Logo height={28} className="h-6 w-auto md:h-7" />
+          <p className="mt-space-xs max-w-[20rem] text-[0.8125rem] leading-snug text-ink-muted md:mt-space-sm md:text-body md:leading-body">
             {site.promise}
           </p>
         </div>
@@ -20,7 +20,7 @@ export function SiteFooter() {
           <p className="font-mono text-label uppercase text-ink-muted">
             {footer.navTitle}
           </p>
-          <ul className="mt-space-2xs grid grid-cols-2 gap-x-space-md md:mt-space-xs md:grid-cols-1">
+          <ul className="mt-space-2xs md:mt-space-xs">
             {nav.map((item) => (
               <li key={item.href}>
                 <Link href={item.href} className={link}>
@@ -39,7 +39,7 @@ export function SiteFooter() {
           <p className="font-mono text-label uppercase text-ink-muted">
             {footer.contactTitle}
           </p>
-          <address className="mt-space-2xs flex flex-wrap gap-x-space-md not-italic md:mt-space-xs md:block">
+          <address className="mt-space-2xs not-italic max-md:flex max-md:flex-col max-md:items-start md:mt-space-xs">
             <a href={site.phone.href} className={link}>
               <Icon name="phone" size={15} />
               {site.phone.display}

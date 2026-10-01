@@ -82,7 +82,7 @@ function LockScreen() {
     <div data-reveal="" style={{ "--i": 1 } as CSSProperties}>
       <div
         aria-hidden="true"
-        className="panel-navy relative mt-space-lg hidden max-w-[23rem] rounded-[1.75rem] p-5 shadow-floating lg:block"
+        className="panel-navy relative mt-space-lg max-w-[23rem] rounded-[1.75rem] p-4 shadow-floating sm:p-5"
       >
         <p className="flex items-center justify-between font-mono text-[0.625rem] uppercase tracking-[0.08em] text-white/55">
           <span>{lock.date}</span>
