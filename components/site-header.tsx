@@ -141,9 +141,9 @@ export function SiteHeader() {
     <header
       ref={header}
       data-tone={dark ? "dark" : "light"}
-      className="fixed inset-x-0 top-0 z-floating px-3 pt-[calc(env(safe-area-inset-top)+var(--header-gap))] sm:px-5"
+      className="pointer-events-none fixed inset-x-0 top-0 z-floating px-3 pt-[calc(env(safe-area-inset-top)+var(--header-gap))] sm:px-5"
     >
-      <div className="relative isolate mx-auto flex h-header max-w-page items-center justify-between gap-3 rounded-full pl-4 pr-1.5 lg:h-[3.75rem] lg:pl-6 lg:pr-2">
+      <div className="pointer-events-auto relative isolate mx-auto flex h-header max-w-page items-center justify-between gap-3 rounded-full pl-4 pr-1.5 lg:h-[3.75rem] lg:pl-6 lg:pr-2">
         {/* The pill surface: invisible at the top, frosted once scrolled. */}
         <span
           aria-hidden="true"
@@ -163,7 +163,7 @@ export function SiteHeader() {
         <Link
           href="#top"
           onClick={closeForNavigation}
-          className="-m-2 shrink-0 rounded-full p-2 transition-transform duration-150 ease-out active:scale-[0.97]"
+          className="-m-2 shrink-0 rounded-full p-2 transition-transform duration-150 ease-out active:scale-[0.97] max-lg:inline-flex max-lg:min-h-[44px] max-lg:items-center"
           aria-label={copy.home}
         >
           <Logo
@@ -191,7 +191,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 aria-current={current ? "location" : undefined}
-                className={`relative isolate rounded-full px-3.5 py-2 text-small font-medium tracking-[-0.005em] transition-opacity duration-200 ease-out before:absolute before:inset-0 before:-z-10 before:rounded-full before:opacity-0 before:transition-opacity before:duration-200 before:ease-out before:content-[''] hover:opacity-100 hover:before:opacity-100 active:opacity-70 ${
+                className={`relative isolate rounded-full px-3.5 py-2 text-small font-medium tracking-[-0.005em] transition-opacity duration-200 ease-out before:absolute before:inset-0 before:-z-10 before:rounded-full before:opacity-0 before:transition-opacity before:duration-200 before:ease-out before:content-[''] hover:opacity-100 hover:before:opacity-100 active:opacity-70 max-lg:inline-flex max-lg:min-h-[44px] max-lg:items-center ${
                   dark
                     ? "text-white before:bg-white/[0.08]"
                     : "text-navy before:bg-surface-card"
@@ -216,7 +216,7 @@ export function SiteHeader() {
           <a
             href={site.phone.href}
             aria-label={`${copy.call} ${site.phone.display}`}
-            className={`group inline-flex h-11 items-center gap-2.5 rounded-full pr-0 text-small font-semibold transition-[opacity,transform] duration-200 ease-out hover:opacity-90 active:scale-[0.96] lg:pr-3 ${
+            className={`group inline-flex h-[44px] items-center gap-2.5 rounded-full pr-0 text-small font-semibold transition-[opacity,transform] duration-200 ease-out hover:opacity-90 active:scale-[0.96] lg:pr-3 ${
               dark ? "text-white" : "text-navy"
             }`}
           >
@@ -264,7 +264,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? copy.closeMenu : copy.openMenu}
-            className={`relative grid h-11 w-11 place-items-center rounded-full transition-transform duration-150 ease-out hover:opacity-80 active:scale-[0.94] md:hidden ${
+            className={`relative grid h-[44px] w-[44px] place-items-center rounded-full transition-transform duration-150 ease-out hover:opacity-80 active:scale-[0.94] md:hidden ${
               dark ? "text-white" : "text-navy"
             }`}
           >
@@ -306,7 +306,7 @@ export function SiteHeader() {
         onClick={() => setOpen(false)}
         className={`fixed inset-0 -z-10 bg-navy/30 transition-opacity ease-out md:hidden ${
           open
-            ? "opacity-100 duration-200"
+            ? "pointer-events-auto opacity-100 duration-200"
             : "pointer-events-none opacity-0 duration-150"
         }`}
       />
@@ -317,7 +317,7 @@ export function SiteHeader() {
         data-open={open ? "" : undefined}
         className={`mx-auto mt-2 max-w-page origin-top overscroll-contain rounded-card bg-surface-elevated p-5 shadow-floating transition-[opacity,transform] md:hidden ${
           open
-            ? "translate-y-0 scale-100 opacity-100 duration-300 ease-drawer"
+            ? "pointer-events-auto translate-y-0 scale-100 opacity-100 duration-300 ease-drawer"
             : "pointer-events-none -translate-y-2 scale-[0.98] opacity-0 duration-150 ease-out"
         }`}
       >
@@ -359,14 +359,14 @@ export function SiteHeader() {
         <div className="mt-space-sm flex flex-wrap justify-center gap-x-space-md text-small text-ink-muted">
           <a
             href={site.phone.href}
-            className="inline-flex min-h-11 items-center gap-2 active:opacity-60"
+            className="inline-flex min-h-[44px] items-center gap-2 active:opacity-60"
           >
             <Icon name="phone" size={15} />
             {site.phone.display}
           </a>
           <a
             href={`mailto:${site.email}`}
-            className="inline-flex min-h-11 items-center gap-2 active:opacity-60"
+            className="inline-flex min-h-[44px] items-center gap-2 active:opacity-60"
           >
             <Icon name="mail" size={15} />
             {site.email}

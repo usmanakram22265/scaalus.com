@@ -1,5 +1,6 @@
 "use server";
 
+import { trial } from "@/lib/content";
 import { saveTrialRequest } from "@/lib/leads";
 import {
   HONEYPOT,
@@ -40,7 +41,7 @@ export async function startTrial(
       status: "error",
       errors: {},
       values,
-      formError: "Something went wrong. Please try again, or call us.",
+      formError: trial.errorFallback,
     };
   }
 

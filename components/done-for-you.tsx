@@ -53,7 +53,7 @@ export function DoneForYou() {
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <ul className="mt-3.5 grid gap-2.5 lg:mt-4">
+                <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 sm:mt-3.5 sm:grid sm:gap-2.5 lg:mt-4">
                   {group.items.map((item) => (
                     <li
                       key={item}

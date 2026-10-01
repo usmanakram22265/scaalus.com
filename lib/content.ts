@@ -438,12 +438,13 @@ export const trial = {
     notes: "Your trade, service area, busiest season…",
   },
   contactHint: "Add a phone number, an email, or both.",
-  honeypot: "Company website",
+  honeypot: "Leave this field empty",
   submit: "Start my free trial",
   pending: "Starting your trial…",
   consent:
     "By submitting, you agree that Scaalus may contact you by call, text or email about your trial. Message and data rates may apply. Reply STOP to opt out.",
   errorFallback: "Something went wrong. Please try again, or call us.",
+  retry: "Try again",
   success: {
     title: "You're in. We'll be in touch soon.",
     body: "Thanks for starting your free trial. Keep your phone handy: we'll reach out to get everything set up.",

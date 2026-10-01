@@ -45,15 +45,15 @@ const config: Config = {
       // Mobile-first fluid scale; tracking tightens as size grows.
       fontSize: {
         "display-2xl": [
-          "clamp(2.5rem, 1.55rem + 4.2vw, 4.75rem)",
+          "var(--fs-display-2xl)",
           { lineHeight: "1.02", letterSpacing: "-0.042em", fontWeight: "600" },
         ],
         "display-xl": [
-          "clamp(2.125rem, 1.5rem + 2.9vw, 3.75rem)",
+          "var(--fs-display-xl)",
           { lineHeight: "1.04", letterSpacing: "-0.038em", fontWeight: "600" },
         ],
         "display-lg": [
-          "clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem)",
+          "var(--fs-display-lg)",
           { lineHeight: "1.08", letterSpacing: "-0.032em", fontWeight: "600" },
         ],
         title: [
@@ -79,12 +79,12 @@ const config: Config = {
         "space-2xs": "0.25rem",
         "space-xs": "0.5rem",
         "space-sm": "1rem",
-        "space-md": "1.5rem",
-        "space-lg": "2.5rem",
-        "space-xl": "clamp(2.5rem, 1.6rem + 2.8vw, 4rem)",
-        "space-2xl": "clamp(3.5rem, 2.3rem + 4vw, 6rem)",
+        "space-md": "var(--space-md)",
+        "space-lg": "var(--space-lg)",
+        "space-xl": "var(--space-xl)",
+        "space-2xl": "var(--space-2xl)",
         "space-3xl": "9rem",
-        section: "clamp(4rem, 0.4rem + 9.6vw, 8.5rem)",
+        section: "var(--space-section)",
         header: "4rem",
       },
       maxWidth: {

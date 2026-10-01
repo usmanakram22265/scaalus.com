@@ -285,7 +285,7 @@ export function StepsScroller() {
               {/* Inline visual (mobile/tablet) */}
               <div
                 aria-hidden="true"
-                className="panel-stone mt-4 h-48 overflow-hidden rounded-2xl p-3 sm:h-60 sm:p-4 lg:hidden"
+                className="panel-stone mt-3 grid min-h-40 overflow-hidden rounded-2xl px-3 py-4 sm:mt-4 sm:h-60 sm:p-4 sm:py-3 lg:hidden"
               >
                 <Visual active={seen[i] ?? false} />
               </div>

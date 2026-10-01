@@ -4,7 +4,7 @@ import { Icon } from "./ui/icons";
 import { Logo } from "./ui/logo";
 
 const link =
-  "inline-flex min-h-11 items-center gap-2 text-navy opacity-70 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-50";
+  "inline-flex min-h-[44px] items-center gap-2 text-navy opacity-70 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-50";
 
 export function SiteFooter() {
   return (
@@ -59,7 +59,7 @@ export function SiteFooter() {
           </p>
           <Link
             href="#top"
-            className="group inline-flex min-h-11 items-center gap-2 text-[0.8125rem] font-medium text-navy opacity-70 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-50"
+            className="group inline-flex min-h-[44px] items-center gap-2 text-[0.8125rem] font-medium text-navy opacity-70 transition-opacity duration-200 ease-out hover:opacity-100 active:opacity-50"
           >
             {footer.toTop}
             <Icon

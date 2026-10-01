@@ -27,7 +27,7 @@ export function Faq() {
             <div className="mt-4 grid gap-2">
               <a
                 href={site.phone.href}
-                className="group flex min-h-12 items-center gap-3 rounded-xl bg-surface-card px-3 font-medium text-navy transition-transform duration-150 ease-out hover:bg-surface-base active:scale-[0.98]"
+                className="group flex min-h-[max(3rem,44px)] items-center gap-3 rounded-xl bg-surface-card px-3 font-medium text-navy transition-transform duration-150 ease-out hover:bg-surface-base active:scale-[0.98]"
               >
                 <Icon name="phone" size={17} className="text-brand" />
                 {site.phone.display}
@@ -39,7 +39,7 @@ export function Faq() {
               </a>
               <a
                 href={`mailto:${site.email}`}
-                className="group flex min-h-12 items-center gap-3 rounded-xl bg-surface-card px-3 font-medium text-navy transition-transform duration-150 ease-out hover:bg-surface-base active:scale-[0.98]"
+                className="group flex min-h-[max(3rem,44px)] items-center gap-3 rounded-xl bg-surface-card px-3 font-medium text-navy transition-transform duration-150 ease-out hover:bg-surface-base active:scale-[0.98]"
               >
                 <Icon name="mail" size={17} className="text-brand" />
                 {site.email}

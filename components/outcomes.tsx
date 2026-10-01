@@ -239,7 +239,7 @@ export function Outcomes() {
                   <span aria-hidden="true" className="spotlight" />
                   <div
                     aria-hidden="true"
-                    className={`relative grid h-36 place-items-center overflow-hidden rounded-[1.1rem] p-4 sm:h-44 sm:p-5 ${
+                    className={`relative grid h-32 place-items-center overflow-hidden rounded-[1.1rem] p-3 sm:h-44 sm:p-5 ${
                       darkTiles.has(i) ? "panel-navy" : "panel-stone"
                     }`}
                   >

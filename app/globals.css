@@ -19,6 +19,57 @@
   }
 }
 
+/*
+ * Fluid scale. From 1024px up these are the desktop values, unchanged.
+ * Below 1024px the whole page scales down with the screen (no breakpoint
+ * jumps): the root size eases from 16px to ~14.5px at 390px, and headings
+ * and section spacing follow a steeper line so phones keep desktop's
+ * proportions. Each phone formula meets the desktop value exactly at 1024px.
+ */
+:root {
+  --fs-display-2xl: clamp(2.5rem, 1.55rem + 4.2vw, 4.75rem);
+  --fs-display-xl: clamp(2.125rem, 1.5rem + 2.9vw, 3.75rem);
+  --fs-display-lg: clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem);
+  --space-section: clamp(4rem, 0.4rem + 9.6vw, 8.5rem);
+  --space-2xl: clamp(3.5rem, 2.3rem + 4vw, 6rem);
+  --space-xl: clamp(2.5rem, 1.6rem + 2.8vw, 4rem);
+  --space-lg: 2.5rem;
+  --space-md: 1.5rem;
+}
+@media (max-width: 1023.98px) {
+  html {
+    font-size: clamp(88%, calc(84.85% + 0.2366vw), 100%);
+  }
+  :root {
+    --fs-display-2xl: min(
+      clamp(2.5rem, 1.55rem + 4.2vw, 4.75rem),
+      calc(0.854rem + 5.287vw)
+    );
+    --fs-display-xl: min(
+      clamp(2.125rem, 1.5rem + 2.9vw, 3.75rem),
+      calc(0.779rem + 4.027vw)
+    );
+    --fs-display-lg: min(
+      clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem),
+      calc(0.924rem + 2.463vw)
+    );
+    --space-section: min(
+      clamp(4rem, 0.4rem + 9.6vw, 8.5rem),
+      calc(0.491rem + 9.458vw)
+    );
+    --space-2xl: min(
+      clamp(3.5rem, 2.3rem + 4vw, 6rem),
+      calc(0.996rem + 6.042vw)
+    );
+    --space-xl: min(
+      clamp(2.5rem, 1.6rem + 2.8vw, 4rem),
+      calc(0.871rem + 3.942vw)
+    );
+    --space-lg: min(2.5rem, calc(1.281rem + 1.905vw));
+    --space-md: min(1.5rem, calc(0.935rem + 0.883vw));
+  }
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;

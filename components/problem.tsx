@@ -118,7 +118,7 @@ function LockScreen() {
       </div>
       <a
         href="#week"
-        className="group mt-space-md inline-flex min-h-11 items-center gap-2 font-semibold text-brand transition-opacity duration-200 ease-out hover:opacity-80 active:opacity-60"
+        className="group mt-space-md inline-flex min-h-[44px] items-center gap-2 font-semibold text-brand transition-opacity duration-200 ease-out hover:opacity-80 active:opacity-60"
       >
         {lock.fix}
         <Icon

@@ -42,7 +42,7 @@ export function FinalCta() {
             </ul>
             <a
               href={site.phone.href}
-              className="group mt-8 inline-flex min-h-11 items-center gap-3 text-white/80 transition-opacity duration-200 ease-out hover:text-white active:opacity-60"
+              className="group mt-8 inline-flex min-h-[44px] items-center gap-3 text-white/80 transition-opacity duration-200 ease-out hover:text-white active:opacity-60"
             >
               <span className="grid h-10 w-10 place-items-center rounded-full bg-white/[0.08] text-sky ring-1 ring-inset ring-white/10">
                 <Icon name="phone" size={17} />

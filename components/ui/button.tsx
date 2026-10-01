@@ -33,9 +33,9 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-10 px-4 text-[0.875rem]",
-  md: "h-12 px-5 text-[0.9375rem]",
-  lg: "h-14 px-7 text-base",
+  sm: "h-[max(2.5rem,44px)] px-4 text-[0.875rem]",
+  md: "h-[max(3rem,44px)] px-5 text-[0.9375rem]",
+  lg: "h-14 px-5 text-base min-[400px]:px-7",
 };
 
 function classes({

@@ -9,8 +9,12 @@ export const trialFields = [
 ] as const;
 export type TrialField = (typeof trialFields)[number];
 
-/** Hidden field real people never fill in. */
-export const HONEYPOT = "company_website";
+/**
+ * Hidden field real people never fill in. Its name and label avoid words
+ * autofill recognises (company, website, email…), so phones never fill it
+ * and real requests are never mistaken for bots.
+ */
+export const HONEYPOT = "hp_check";
 
 // Empty strings mean "not given" for the optional fields.
 const optional = (value: string) => value.trim() === "";

@@ -59,7 +59,7 @@ function Lead({
   const l = look[kind];
   return (
     <div
-      className={`col-start-1 row-start-1 flex min-h-[4.25rem] items-center gap-3 rounded-2xl px-3.5 py-3 transition-[opacity,transform] ease-out motion-reduce:transform-none lg:min-h-[8.5rem] lg:flex-col lg:items-start lg:justify-between lg:p-4 ${l.card} ${
+      className={`col-start-1 row-start-1 flex min-h-[3.5rem] items-center gap-3 rounded-2xl px-3.5 py-2.5 transition-[opacity,transform] ease-out motion-reduce:transform-none sm:min-h-[4.25rem] sm:py-3 lg:min-h-[8.5rem] lg:flex-col lg:items-start lg:justify-between lg:p-4 ${l.card} ${
         on
           ? "translate-y-0 scale-100 opacity-100 duration-500"
           : "pointer-events-none translate-y-2 scale-[0.97] opacity-0 duration-200"
@@ -140,7 +140,7 @@ export function WeekCompare() {
             return (
               <label
                 key={option.label}
-                className={`relative z-10 flex h-11 w-[9.5rem] cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-3 text-[0.875rem] font-semibold transition-transform duration-150 ease-out active:scale-[0.97] sm:w-[10.5rem] sm:px-6 [&:has(:focus-visible)]:outline [&:has(:focus-visible)]:outline-2 [&:has(:focus-visible)]:outline-offset-2 [&:has(:focus-visible)]:outline-brand ${
+                className={`relative z-10 flex h-[44px] w-[9.5rem] cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-3 text-[0.875rem] font-semibold transition-transform duration-150 ease-out active:scale-[0.97] sm:w-[10.5rem] sm:px-6 [&:has(:focus-visible)]:outline [&:has(:focus-visible)]:outline-2 [&:has(:focus-visible)]:outline-offset-2 [&:has(:focus-visible)]:outline-brand ${
                   checked ? "text-white" : "text-navy/70 hover:text-navy"
                 }`}
               >

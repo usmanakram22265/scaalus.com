@@ -1,10 +1,13 @@
 "use client";
 
 import {
+  Component,
   useActionState,
   useEffect,
   useRef,
+  useState,
   type InputHTMLAttributes,
+  type ReactNode,
 } from "react";
 import { startTrial } from "@/app/actions";
 import { site, trial } from "@/lib/content";
@@ -83,7 +86,7 @@ function Field({ name, label, error, hint, className, ...input }: FieldProps) {
         name={name}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy || undefined}
-        className={`${inputClass} h-12`}
+        className={`${inputClass} h-[max(3rem,44px)]`}
         {...input}
       />
       <ErrorText id={errorId}>{error}</ErrorText>
@@ -91,7 +94,9 @@ function Field({ name, label, error, hint, className, ...input }: FieldProps) {
   );
 }
 
-export function TrialForm() {
+function TrialFormInner() {
+  // Server action passed directly, so the form also submits before
+  // JavaScript has loaded (slow phones). Failures are caught by FormGuard.
   const [state, formAction, pending] = useActionState(
     startTrial,
     initialTrialState,
@@ -277,5 +282,59 @@ export function TrialForm() {
         ) : null}
       </div>
     </div>
+  );
+}
+
+/**
+ * If a submit fails outright (offline, or a tab opened before a new deploy),
+ * show the fallback with our phone number and a fresh form, instead of
+ * breaking the page.
+ */
+class FormGuard extends Component<
+  { onReset: () => void; children: ReactNode },
+  { failed: boolean }
+> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    if (!this.state.failed) return this.props.children;
+    return (
+      <div
+        role="alert"
+        data-tone="light"
+        className="rounded-[1.75rem] bg-surface-elevated p-6 text-center shadow-floating sm:p-8"
+      >
+        <p className="font-medium text-danger">{trial.errorFallback}</p>
+        <a
+          href={site.phone.href}
+          className="mt-3 inline-flex min-h-[44px] items-center gap-2 font-semibold text-navy underline underline-offset-2"
+        >
+          <Icon name="phone" size={16} />
+          {site.phone.display}
+        </a>
+        <Button
+          size="md"
+          arrow
+          className="mt-4 w-full"
+          onClick={() => {
+            this.setState({ failed: false });
+            this.props.onReset();
+          }}
+        >
+          {trial.retry}
+        </Button>
+      </div>
+    );
+  }
+}
+
+export function TrialForm() {
+  const [attempt, setAttempt] = useState(0);
+  return (
+    <FormGuard onReset={() => setAttempt((n) => n + 1)}>
+      <TrialFormInner key={attempt} />
+    </FormGuard>
   );
 }

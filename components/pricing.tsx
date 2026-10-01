@@ -87,8 +87,8 @@ export function Pricing() {
             <h3 className="text-center text-[clamp(1.375rem,1.2rem+0.8vw,1.75rem)] font-semibold leading-tight tracking-[-0.03em] text-white lg:text-left">
               {compare.title}
             </h3>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-card p-4 ring-1 ring-inset ring-white/10 sm:p-5">
+            <div className="mt-5 grid gap-3 min-[380px]:grid-cols-2">
+              <div className="rounded-card p-3.5 ring-1 ring-inset ring-white/10 sm:p-5">
                 <p className="font-mono text-label uppercase text-white/60">
                   {compare.agency.label}
                 </p>
@@ -109,7 +109,7 @@ export function Pricing() {
                   ))}
                 </ul>
               </div>
-              <div className="card-on-navy relative p-4 sm:p-5">
+              <div className="card-on-navy relative p-3.5 sm:p-5">
                 <p className="font-mono text-label uppercase text-sky">
                   {compare.scaalus.label}
                 </p>

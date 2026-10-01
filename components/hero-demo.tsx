@@ -384,7 +384,7 @@ export function HeroDemo() {
             type="button"
             onClick={() => setPlaying((p) => !p)}
             aria-label={playing ? demo.pauseLabel : demo.playLabel}
-            className="inline-flex h-11 items-center gap-2 rounded-full px-3 font-mono text-label uppercase text-white/70 transition-[opacity,transform] duration-150 ease-out hover:text-white active:scale-[0.97]"
+            className="inline-flex h-[44px] items-center gap-2 rounded-full px-3 font-mono text-label uppercase text-white/70 transition-[opacity,transform] duration-150 ease-out hover:text-white active:scale-[0.97]"
           >
             <Icon
               name={playing ? "pause" : "play"}
