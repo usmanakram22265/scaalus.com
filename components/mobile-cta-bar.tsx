@@ -36,7 +36,7 @@ export function MobileCtaBar() {
     <div
       inert={!visible}
       data-tone="dark"
-      className={`fixed inset-x-0 bottom-0 z-floating px-3 pb-[calc(0.75rem+var(--safe-bottom))] transition-[opacity,transform] ease-out motion-reduce:translate-y-0 md:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-floating px-3 pb-[calc(0.75rem+var(--safe-bottom))] transition-[opacity,transform] ease-out md:hidden ${
         visible
           ? "translate-y-0 opacity-100 duration-300 ease-drawer"
           : "pointer-events-none translate-y-[110%] opacity-0 duration-200"

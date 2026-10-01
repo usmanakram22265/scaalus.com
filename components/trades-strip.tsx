@@ -22,7 +22,7 @@ function Row({ hidden }: { hidden?: boolean }) {
   );
 }
 
-/** Who it's for, as a slow marquee. Pauses on hover/focus, offscreen and under reduced motion. */
+/** Who it's for, as a slow marquee. Pauses on hover/focus and offscreen. */
 export function TradesStrip() {
   return (
     <section

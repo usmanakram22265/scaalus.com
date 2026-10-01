@@ -10,7 +10,7 @@ const v = steps.visual;
 /** Staggered in/out for the pieces of a step visual. */
 function piece(active: boolean, i: number) {
   return {
-    className: `transition-[opacity,transform] ease-out motion-reduce:transform-none ${
+    className: `transition-[opacity,transform] ease-out ${
       active
         ? "translate-y-0 scale-100 opacity-100 duration-500"
         : "translate-y-3 scale-[0.97] opacity-0 duration-200"

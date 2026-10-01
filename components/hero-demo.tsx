@@ -14,8 +14,7 @@ import { Icon } from "./ui/icons";
  * Illustrative story (generic labels, no real customers or stats):
  * missed call → automatic text back → typing → reply → offer → yes → booked.
  * Starts mid-thread so the phone is never empty, plays from load at any viewport,
- * pauses in hidden tabs and has a visible pause control. With reduced motion
- * it still plays, but messages only fade (no slide, scale or tilt).
+ * pauses in hidden tabs and has a visible pause control.
  *
  * Steps: 1 missed · 2 text back · 3 customer typing · 4 ask · 5 typing ·
  *        6 offer · 7 customer typing · 8 yes · 9 booked
@@ -59,8 +58,7 @@ function useTilt() {
   useEffect(() => {
     const el = ref.current;
     const fine = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!el || !fine.matches || reduced.matches) return;
+    if (!el || !fine.matches) return;
 
     const target = { x: 0, y: 0 };
     const current = { x: 0, y: 0 };
@@ -139,7 +137,7 @@ function Beat({
   return (
     <div className="grid">
       <div
-        className={`col-start-1 row-start-1 transition-[opacity,transform] ease-out motion-reduce:transform-none ${origin} ${
+        className={`col-start-1 row-start-1 transition-[opacity,transform] ease-out ${origin} ${
           shown
             ? "translate-y-0 scale-100 opacity-100 duration-500"
             : "translate-y-2 scale-[0.96] opacity-0 duration-200"
@@ -149,7 +147,7 @@ function Beat({
       </div>
       {side !== "center" ? (
         <div
-          className={`col-start-1 row-start-1 flex self-end ${side === "right" ? "justify-end" : "justify-start"} transition-[opacity,transform] ease-out motion-reduce:transform-none ${origin} ${
+          className={`col-start-1 row-start-1 flex self-end ${side === "right" ? "justify-end" : "justify-start"} transition-[opacity,transform] ease-out ${origin} ${
             typing
               ? "scale-100 opacity-100 duration-300"
               : "scale-90 opacity-0 duration-150"
@@ -268,7 +266,7 @@ export function HeroDemo() {
         >
           <div className="float loop" style={{ "--i": 1 } as CSSProperties}>
             <p
-              className={`flex items-center gap-2 rounded-full bg-surface-elevated py-2 pl-2 pr-3.5 text-[0.8125rem] font-semibold text-navy shadow-floating transition-[opacity,transform] duration-500 ease-out motion-reduce:transform-none ${
+              className={`flex items-center gap-2 rounded-full bg-surface-elevated py-2 pl-2 pr-3.5 text-[0.8125rem] font-semibold text-navy shadow-floating transition-[opacity,transform] duration-500 ease-out ${
                 replied ? "scale-100 opacity-100" : "scale-95 opacity-0"
               }`}
             >
@@ -308,7 +306,7 @@ export function HeroDemo() {
                     {demo.open}
                   </span>
                   <span
-                    className={`col-start-1 row-start-1 flex items-center justify-between gap-1.5 rounded-lg bg-brand px-2.5 py-1.5 text-[0.75rem] font-semibold text-white shadow-cta transition-[opacity,transform] ease-out motion-reduce:transform-none ${
+                    className={`col-start-1 row-start-1 flex items-center justify-between gap-1.5 rounded-lg bg-brand px-2.5 py-1.5 text-[0.75rem] font-semibold text-white shadow-cta transition-[opacity,transform] ease-out ${
                       booked
                         ? "scale-100 opacity-100 duration-500"
                         : "scale-[0.94] opacity-0 duration-200"
@@ -339,7 +337,7 @@ export function HeroDemo() {
         {/* "Job booked" toast */}
         <div className="absolute -right-1 top-[4%] sm:-right-12">
           <div
-            className={`flex items-center gap-2.5 rounded-2xl bg-surface-elevated py-2.5 pl-2.5 pr-4 shadow-floating transition-[opacity,transform] ease-out motion-reduce:transform-none ${
+            className={`flex items-center gap-2.5 rounded-2xl bg-surface-elevated py-2.5 pl-2.5 pr-4 shadow-floating transition-[opacity,transform] ease-out ${
               booked
                 ? "translate-y-0 scale-100 opacity-100 duration-500"
                 : "-translate-y-3 scale-95 opacity-0 duration-200"

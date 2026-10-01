@@ -79,10 +79,8 @@
     text-rendering: optimizeLegibility;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -717,92 +715,35 @@ summary::-webkit-details-marker {
 }
 
 /*
- * Reduced motion is gentle, not empty: nothing slides, spins, scales or
- * scrolls sideways, but things still fade in and pulse softly, so the page
- * keeps its life for people who turn the setting on.
+ * Touch screens get the hover effects in their own way, so phones feel as
+ * alive as desktop: the button sheen glints on its own every few seconds,
+ * and a card glows and lifts while it's pressed (Spotlight sets data-pressed).
  */
-@keyframes fade-in {
-  from {
-    opacity: 0;
+@keyframes glint {
+  0% {
+    transform: translateX(-120%) skewX(-12deg);
   }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes soft-pulse {
-  0%,
+  22%,
   100% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.6;
+    transform: translateX(220%) skewX(-12deg);
   }
 }
-@keyframes dot-fade {
-  0%,
-  60%,
-  100% {
-    opacity: 0.3;
-  }
-  30% {
-    opacity: 1;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  .js [data-reveal],
-  .js [data-reveal="scale"] {
-    transform: none;
-    transition-property: opacity;
-    transition-duration: 500ms;
-    transition-timing-function: ease;
-  }
-  .bar,
-  .scene-in {
-    transform: none;
-    animation: fade-in 700ms ease both;
-  }
-  .js [data-reveal] .bar {
-    transform: none;
-    transition-property: opacity;
-  }
-  .float,
-  .ring,
-  .spin-slow,
-  .spin-fast,
-  .spin-badge,
-  .marquee-track,
-  .beam::before {
-    animation: none;
-  }
-  .ripple {
-    transform: none;
-    animation: soft-pulse 2.8s ease-in-out infinite;
-  }
-  .typing-dot {
-    transform: none;
-    animation: dot-fade 1.1s ease-in-out infinite;
-    animation-delay: calc(var(--i, 0) * 150ms);
-  }
-  .js [data-reveal] .draw-x {
-    transform: none;
-    transition: none;
-  }
-  .js [data-reveal] .pop,
-  .js [data-reveal] .pop.pin {
-    transform: none;
-    transition-property: opacity;
-    transition-duration: 400ms;
-  }
+@media (hover: none) {
   .sheen::after {
-    display: none;
+    animation: glint 5s var(--ease-out) 1.2s infinite;
   }
-  .lift:hover {
-    transform: none;
+  [data-spotlight][data-pressed] > .spotlight {
+    opacity: 1;
   }
-  details[open] > .faq-body {
-    animation: fade-in 300ms ease both;
+  /* .js raises it above the scroll-reveal rule on cards that also reveal. */
+  .js .lift[data-pressed] {
+    transform: translateY(-4px);
+    transition:
+      transform 300ms var(--ease-out),
+      opacity 700ms var(--ease-out);
+    transition-delay: 0ms;
+  }
+  .lift[data-pressed]::after {
+    opacity: 1;
   }
 }

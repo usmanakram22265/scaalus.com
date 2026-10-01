@@ -59,7 +59,7 @@ function Lead({
   const l = look[kind];
   return (
     <div
-      className={`col-start-1 row-start-1 flex min-h-[3.5rem] items-center gap-3 rounded-2xl px-3.5 py-2.5 transition-[opacity,transform] ease-out motion-reduce:transform-none sm:min-h-[4.25rem] sm:py-3 lg:min-h-[8.5rem] lg:flex-col lg:items-start lg:justify-between lg:p-4 ${l.card} ${
+      className={`col-start-1 row-start-1 flex min-h-[3.5rem] items-center gap-3 rounded-2xl px-3.5 py-2.5 transition-[opacity,transform] ease-out sm:min-h-[4.25rem] sm:py-3 lg:min-h-[8.5rem] lg:flex-col lg:items-start lg:justify-between lg:p-4 ${l.card} ${
         on
           ? "translate-y-0 scale-100 opacity-100 duration-500"
           : "pointer-events-none translate-y-2 scale-[0.97] opacity-0 duration-200"
