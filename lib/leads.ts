@@ -1,14 +1,11 @@
-import nodemailer from "nodemailer";
 import type { TrialRequest } from "./trial-schema";
 
 /**
- * Where trial requests go: an email from your own mailbox to your own inbox.
- * Set these in .env.local (and in Vercel → Settings → Environment Variables):
- *   LEADS_EMAIL_USER      the mailbox that sends, e.g. you@gmail.com
- *   LEADS_EMAIL_PASSWORD  its app password (Gmail: myaccount.google.com/apppasswords)
- *   LEADS_EMAIL_TO        optional, where it lands; defaults to LEADS_EMAIL_USER
- *   LEADS_SMTP_HOST       optional, defaults to smtp.gmail.com
- *   LEADS_SMTP_PORT       optional, defaults to 465 (SSL)
+ * Where trial requests go: your Google Apps Script web app, which emails them
+ * from your Gmail to your Gmail (see google-apps-script/trial-form.gs).
+ * Set these in .env.local and in Vercel → Settings → Environment Variables:
+ *   LEADS_SCRIPT_URL     the web app URL, ending in /exec
+ *   LEADS_SCRIPT_SECRET  the same secret as SECRET in the script
  */
 export async function saveTrialRequest(request: TrialRequest): Promise<void> {
   const receivedAt = new Date();
@@ -18,19 +15,11 @@ export async function saveTrialRequest(request: TrialRequest): Promise<void> {
     JSON.stringify({ ...request, receivedAt: receivedAt.toISOString() }),
   );
 
-  const user = process.env.LEADS_EMAIL_USER;
-  const pass = process.env.LEADS_EMAIL_PASSWORD;
-  if (!user || !pass) {
-    throw new Error("LEADS_EMAIL_USER / LEADS_EMAIL_PASSWORD are not set");
+  const url = process.env.LEADS_SCRIPT_URL;
+  const secret = process.env.LEADS_SCRIPT_SECRET;
+  if (!url || !secret) {
+    throw new Error("LEADS_SCRIPT_URL / LEADS_SCRIPT_SECRET are not set");
   }
-
-  const port = Number(process.env.LEADS_SMTP_PORT) || 465;
-  const transport = nodemailer.createTransport({
-    host: process.env.LEADS_SMTP_HOST || "smtp.gmail.com",
-    port,
-    secure: port === 465,
-    auth: { user, pass },
-  });
 
   const rows: [string, string | undefined][] = [
     ["Name", request.name],
@@ -45,21 +34,37 @@ export async function saveTrialRequest(request: TrialRequest): Promise<void> {
     ],
   ];
 
-  await transport.sendMail({
-    from: { name: "Scaalus website", address: user },
-    to: process.env.LEADS_EMAIL_TO || user,
-    // Hitting Reply goes straight to the lead.
-    replyTo: request.email,
-    subject: `New free trial request: ${request.name} (${request.business})`,
-    text: rows.map(([k, v]) => `${k}: ${v || "-"}`).join("\n"),
-    html: `<h2 style="font-family:sans-serif;color:#0D2847">New free trial request</h2>
+  const res = await fetch(url, {
+    method: "POST",
+    // text/plain keeps Apps Script from rejecting the request.
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({
+      secret,
+      subject: `New free trial request: ${request.name} (${request.business})`,
+      // Hitting Reply goes straight to the lead.
+      replyTo: request.email ?? "",
+      text: rows.map(([k, v]) => `${k}: ${v || "-"}`).join("\n"),
+      html: `<h2 style="font-family:sans-serif;color:#0D2847">New free trial request</h2>
 <table style="font-family:sans-serif;font-size:15px;border-collapse:collapse">${rows
-      .map(
-        ([k, v]) =>
-          `<tr><td style="padding:6px 16px 6px 0;color:#5B6573;vertical-align:top">${escape(k)}</td><td style="padding:6px 0;color:#0D2847;white-space:pre-wrap">${escape(v || "-")}</td></tr>`,
-      )
-      .join("")}</table>`,
+        .map(
+          ([k, v]) =>
+            `<tr><td style="padding:6px 16px 6px 0;color:#5B6573;vertical-align:top">${escape(k)}</td><td style="padding:6px 0;color:#0D2847;white-space:pre-wrap">${escape(v || "-")}</td></tr>`,
+        )
+        .join("")}</table>`,
+    }),
+    cache: "no-store",
+    signal: AbortSignal.timeout(15000),
   });
+
+  const result = (await res.json().catch(() => null)) as {
+    ok?: boolean;
+    error?: string;
+  } | null;
+  if (!res.ok || !result?.ok) {
+    throw new Error(
+      `Apps Script rejected the request: ${res.status} ${result?.error ?? "no JSON reply (check the deployment access is 'Anyone')"}`,
+    );
+  }
 }
 
 function formatPhone(digits: string) {
