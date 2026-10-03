@@ -1,12 +1,11 @@
 /**
  * Scaalus trial form → your Gmail.
  * Paste this into a new Google Apps Script project (script.google.com),
- * change SECRET, then Deploy → New deployment → Web app:
+ * then Deploy → New deployment → Web app:
  *   Execute as: Me    Who has access: Anyone
- * Put the /exec URL in LEADS_SCRIPT_URL and the same SECRET in
- * LEADS_SCRIPT_SECRET (Vercel → Settings → Environment Variables).
+ * The /exec URL and this SECRET are set in lib/leads.ts.
  */
-const SECRET = "CHANGE-ME-to-a-long-random-phrase";
+const SECRET = "nQAwuaH89Tp8eJEmj9hpwXLH";
 
 function doPost(e) {
   try {

@@ -3,10 +3,14 @@ import type { TrialRequest } from "./trial-schema";
 /**
  * Where trial requests go: your Google Apps Script web app, which emails them
  * from your Gmail to your Gmail (see google-apps-script/trial-form.gs).
- * Set these in .env.local and in Vercel → Settings → Environment Variables:
- *   LEADS_SCRIPT_URL     the web app URL, ending in /exec
- *   LEADS_SCRIPT_SECRET  the same secret as SECRET in the script
+ * The defaults below are the live script; LEADS_SCRIPT_URL and
+ * LEADS_SCRIPT_SECRET env vars override them. Keep this repo private: the
+ * secret must match SECRET in the script.
  */
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbzKfZtKy5bN6Ytt4t_NVr6d_XRRqANarQ-nCZRE6TpLKAWuhmZ3jbl8a1WSUTRR3W2ekQ/exec";
+const SCRIPT_SECRET = "nQAwuaH89Tp8eJEmj9hpwXLH";
+
 export async function saveTrialRequest(request: TrialRequest): Promise<void> {
   const receivedAt = new Date();
   // Always keep a copy in the server logs, so no request is ever lost.
@@ -15,11 +19,8 @@ export async function saveTrialRequest(request: TrialRequest): Promise<void> {
     JSON.stringify({ ...request, receivedAt: receivedAt.toISOString() }),
   );
 
-  const url = process.env.LEADS_SCRIPT_URL;
-  const secret = process.env.LEADS_SCRIPT_SECRET;
-  if (!url || !secret) {
-    throw new Error("LEADS_SCRIPT_URL / LEADS_SCRIPT_SECRET are not set");
-  }
+  const url = process.env.LEADS_SCRIPT_URL || SCRIPT_URL;
+  const secret = process.env.LEADS_SCRIPT_SECRET || SCRIPT_SECRET;
 
   const rows: [string, string | undefined][] = [
     ["Name", request.name],
