@@ -420,7 +420,7 @@ export const trial = {
   eyebrow: "7-day free trial",
   title: "Tonight's missed call could be tomorrow's booked job.",
   highlight: "tomorrow's booked job.",
-  body: "Tell us about your business. We'll reach out to get you set up.",
+  body: "Pick a time for a quick call. We'll set up your free trial on your real leads.",
   points: ["No contract", "Cancel anytime", "Satisfaction guarantee"],
   formTitle: "Start your free trial",
   labels: {
@@ -450,6 +450,22 @@ export const trial = {
     body: "Thanks for starting your free trial. Keep your phone handy: we'll reach out to get everything set up.",
   },
 };
+
+/**
+ * GoHighLevel "Scaalus Demo Calendar". A confirmed booking here starts the
+ * "0. Call Booked" workflow in GHL, so keep this pointing at that calendar.
+ */
+export const booking = {
+  url: "https://link.scaalus.com/widget/booking/lQ4WyfczjgRtN3ebnMg9",
+  embedScript: "https://link.scaalus.com/js/form_embed.js",
+  frameTitle: "Book your free trial call with Scaalus",
+  loading: "Loading available times…",
+  fallback: "Calendar not loading?",
+  fallbackLink: "Open it in a new tab",
+  dialogTitle: "Start your 7-day free trial",
+  dialogBody: "Pick a time for a quick call, then add your details.",
+  close: "Close",
+} as const;
 
 export const footer = {
   tagline: "Booked jobs, not missed calls.",

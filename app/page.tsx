@@ -1,3 +1,4 @@
+import { BookingDialog } from "@/components/booking-dialog";
 import { DoneForYou } from "@/components/done-for-you";
 import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
@@ -46,6 +47,7 @@ export default function Home() {
       </main>
       <SiteFooter />
       <MobileCtaBar />
+      <BookingDialog />
       <RevealObserver />
       <Spotlight />
     </>

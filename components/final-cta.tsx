@@ -1,10 +1,10 @@
 import type { CSSProperties } from "react";
 import { site, trial } from "@/lib/content";
+import { BookingCalendar } from "./booking-calendar";
 import { Icon } from "./ui/icons";
 import { Eyebrow, TwoTone } from "./ui/section";
-import { TrialForm } from "./trial-form";
 
-/** Navy moment #3: the close, with the form right there. */
+/** Navy moment #3: the close, with the booking calendar right there. */
 export function FinalCta() {
   return (
     <div className="px-2 sm:px-3">
@@ -52,7 +52,12 @@ export function FinalCta() {
           </div>
 
           <div data-reveal="scale" style={{ "--i": 1 } as CSSProperties}>
-            <TrialForm />
+            <div
+              data-tone="light"
+              className="overflow-hidden rounded-[1.75rem] bg-surface-elevated p-2 shadow-floating sm:p-3"
+            >
+              <BookingCalendar id="booking-calendar" />
+            </div>
           </div>
         </div>
       </section>
