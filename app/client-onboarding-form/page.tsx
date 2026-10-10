@@ -53,10 +53,10 @@ export default function ClientOnboardingForm() {
         </section>
       </div>
 
-      <main id="main" className="container-page pb-space-2xl">
+      <main id="main" className="container-page px-2 pb-space-2xl sm:px-5">
         <div
           data-tone="light"
-          className="relative mx-auto -mt-28 max-w-[52rem] rounded-card bg-surface-elevated px-5 py-6 shadow-floating sm:p-8"
+          className="relative mx-auto -mt-28 max-w-[52rem] rounded-card bg-surface-elevated px-4 py-6 shadow-floating sm:p-8"
         >
           <GhlFormEmbed
             id="onboarding-form"
