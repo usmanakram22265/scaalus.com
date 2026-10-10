@@ -422,33 +422,6 @@ export const trial = {
   highlight: "tomorrow's booked job.",
   body: "Pick a time for a quick call. We'll set up your free trial on your real leads.",
   points: ["No contract", "Cancel anytime", "Satisfaction guarantee"],
-  formTitle: "Start your free trial",
-  labels: {
-    name: "Your name",
-    business: "Business type",
-    phone: "Mobile phone",
-    email: "Email",
-    notes: "Anything we should know?",
-    optional: "Optional",
-  },
-  placeholders: {
-    business: "Roofing, HVAC, plumbing…",
-    phone: "(555) 123-4567",
-    email: "you@company.com",
-    notes: "Your trade, service area, busiest season…",
-  },
-  contactHint: "Add a phone number, an email, or both.",
-  honeypot: "Leave this field empty",
-  submit: "Start my free trial",
-  pending: "Starting your trial…",
-  consent:
-    "By submitting, you agree that Scaalus may contact you by call, text or email about your trial. Message and data rates may apply. Reply STOP to opt out.",
-  errorFallback: "Something went wrong. Please try again, or call us.",
-  retry: "Try again",
-  success: {
-    title: "You're in. We'll be in touch soon.",
-    body: "Thanks for starting your free trial. Keep your phone handy: we'll reach out to get everything set up.",
-  },
 };
 
 /**
