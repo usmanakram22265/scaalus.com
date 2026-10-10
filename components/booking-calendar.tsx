@@ -2,20 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import { booking } from "@/lib/content";
-
-type ResizedFrame = HTMLIFrameElement & {
-  iFrameResizer?: { removeListeners?: () => void };
-};
-
-declare global {
-  interface Window {
-    /** Exposed by GHL's form_embed.js (iframe-resizer). */
-    iFrameResize?: (
-      options: Record<string, unknown>,
-      target: HTMLIFrameElement,
-    ) => unknown;
-  }
-}
+import {
+  loadGhlEmbedScript,
+  startAutoResize,
+  type ResizedFrame,
+} from "@/lib/ghl-embed";
 
 /**
  * GHL shows the calendar in one compact row from 1000px wide; the extra
@@ -24,26 +15,6 @@ declare global {
 const COMPACT_WIDTH = 1040;
 /** Never shrink the calendar further than this to make it fit. */
 const MIN_SCALE = 0.8;
-
-let embedScript: Promise<void> | null = null;
-
-/**
- * GHL's form_embed.js sizes the iframe to whichever step is showing (calendar,
- * time slots, details form). It only scans the page once, when it runs, so it
- * loads before any iframe has a src and each iframe is registered by hand.
- * If it's blocked, the calendar still works at its reserved height.
- */
-function loadEmbedScript() {
-  embedScript ??= new Promise<void>((resolve) => {
-    const script = document.createElement("script");
-    script.src = booking.embedScript;
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => resolve();
-    document.body.appendChild(script);
-  });
-  return embedScript;
-}
 
 type Props = {
   /** Unique on the page: the resizer keys iframes by id. */
@@ -80,7 +51,7 @@ export function BookingCalendar({
     if (!el) return;
     let cancelled = false;
     const start = () =>
-      loadEmbedScript().then(() => {
+      loadGhlEmbedScript().then(() => {
         if (!cancelled) setSrc(booking.url);
       });
 
@@ -108,19 +79,7 @@ export function BookingCalendar({
   useEffect(() => {
     const el = frame.current;
     if (!frameSrc || !el) return;
-    window.iFrameResize?.(
-      {
-        log: false,
-        checkOrigin: false,
-        heightCalculationMethod: "offset",
-        autoResize: true,
-        sizeWidth: false,
-        sizeHeight: true,
-        scrolling: true,
-      },
-      el,
-    );
-    return () => el.iFrameResizer?.removeListeners?.();
+    return startAutoResize(el);
   }, [frameSrc]);
 
   // Only needed when fitting: track the space we have and the calendar's height.
@@ -163,6 +122,9 @@ export function BookingCalendar({
           id={id}
           src={frameSrc}
           title={booking.frameTitle}
+          // Tells GHL's script it's handled, so it never hides the iframe while
+          // waiting on its own tracking calls (which ad blockers can stop).
+          data-initial-iframe-hidden="true"
           allow="payment"
           onLoad={() => {
             if (frameSrc) setLoaded(true);

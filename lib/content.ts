@@ -440,6 +440,27 @@ export const booking = {
   close: "Close",
 } as const;
 
+/**
+ * Client onboarding page: the GHL "Client Website Content Questionnaire".
+ * Not linked from the site; sent to new clients.
+ */
+export const onboarding = {
+  formUrl: "https://link.scaalus.com/widget/form/P5i3eJ9SnpZG4mbfPfQl",
+  metaTitle: "Client Onboarding Form",
+  metaDescription:
+    "Tell us about your business so we can build your website and set up your system.",
+  home: "Scaalus home",
+  eyebrow: "Client onboarding",
+  title: "Tell us about your business.",
+  highlight: "your business.",
+  body: "We use your answers to build your website and set up your system. Not sure about something? Leave it blank and we'll go over it together.",
+  frameTitle: "Scaalus client onboarding form",
+  loading: "Loading the form…",
+  fallback: "Form not loading?",
+  fallbackLink: "Open it in a new tab",
+  help: "Questions? Call or text",
+} as const;
+
 export const footer = {
   tagline: "Booked jobs, not missed calls.",
   navTitle: "Explore",
