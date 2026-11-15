@@ -15,6 +15,8 @@ import {
 const COMPACT_WIDTH = 1040;
 /** Never shrink the calendar further than this to make it fit. */
 const MIN_SCALE = 0.8;
+/** Breathing room left above and below a section fitted to the window. */
+const SECTION_MARGIN = 16;
 
 type Props = {
   /** Unique on the page: the resizer keys iframes by id. */
@@ -26,6 +28,11 @@ type Props = {
    * it uses GHL's compact layout and scales down a little if needed.
    */
   fitHeight?: number;
+  /**
+   * From lg up, fit the calendar so its whole <section> fits the window:
+   * the height left over after everything else in the section.
+   */
+  fitSection?: boolean;
   /** Show the "open in a new tab" link only until the calendar loads. */
   fallbackUntilLoaded?: boolean;
   className?: string;
@@ -35,7 +42,8 @@ type Props = {
 export function BookingCalendar({
   id,
   eager = false,
-  fitHeight,
+  fitHeight: fixedFit,
+  fitSection = false,
   fallbackUntilLoaded = false,
   className,
 }: Props) {
@@ -44,7 +52,38 @@ export function BookingCalendar({
   const [src, setSrc] = useState<string>();
   const [loaded, setLoaded] = useState(false);
   const [size, setSize] = useState({ width: 0, frameHeight: 0 });
+  const [sectionFit, setSectionFit] = useState<number>();
+  const fitHeight = fixedFit ?? sectionFit;
   const frameSrc = fitHeight && !size.width ? undefined : src;
+
+  // The window's height minus everything in the section except the calendar.
+  useEffect(() => {
+    const outer = box.current;
+    const section = outer?.closest("section");
+    if (!fitSection || !outer || !section) return;
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      if (!desktop.matches) return setSectionFit(undefined);
+      const rest = section.offsetHeight - outer.offsetHeight;
+      setSectionFit(Math.max(0, window.innerHeight - SECTION_MARGIN - rest));
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+    measure();
+    const observer = new ResizeObserver(schedule);
+    observer.observe(section);
+    window.addEventListener("resize", schedule);
+    desktop.addEventListener("change", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("resize", schedule);
+      desktop.removeEventListener("change", schedule);
+    };
+  }, [fitSection]);
 
   useEffect(() => {
     const el = frame.current;
@@ -83,17 +122,18 @@ export function BookingCalendar({
   }, [frameSrc]);
 
   // Only needed when fitting: track the space we have and the calendar's height.
+  const fitting = Boolean(fitHeight);
   useEffect(() => {
     const outer = box.current;
     const el = frame.current;
-    if (!fitHeight || !outer || !el) return;
+    if (!fitting || !outer || !el) return;
     const observer = new ResizeObserver(() =>
       setSize({ width: outer.clientWidth, frameHeight: el.offsetHeight }),
     );
     observer.observe(outer);
     observer.observe(el);
     return () => observer.disconnect();
-  }, [fitHeight]);
+  }, [fitting]);
 
   // Width first: GHL picks its layout once, on load, so the iframe gets its
   // final width before it gets a src. Then shrink a little more if too tall.
