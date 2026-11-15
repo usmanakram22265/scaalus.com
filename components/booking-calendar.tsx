@@ -33,6 +33,11 @@ type Props = {
    * the height left over after everything else in the section.
    */
   fitSection?: boolean;
+  /**
+   * When fitting, also widen the calendar so GHL uses its one-row layout
+   * (the dialog). Off keeps the layout that suits the space it's in.
+   */
+  compact?: boolean;
   /** Show the "open in a new tab" link only until the calendar loads. */
   fallbackUntilLoaded?: boolean;
   className?: string;
@@ -44,6 +49,7 @@ export function BookingCalendar({
   eager = false,
   fitHeight: fixedFit,
   fitSection = false,
+  compact = true,
   fallbackUntilLoaded = false,
   className,
 }: Props) {
@@ -143,7 +149,7 @@ export function BookingCalendar({
           MIN_SCALE,
           Math.min(
             1,
-            size.width / COMPACT_WIDTH,
+            compact ? size.width / COMPACT_WIDTH : 1,
             size.frameHeight ? fitHeight / size.frameHeight : 1,
           ),
         )
