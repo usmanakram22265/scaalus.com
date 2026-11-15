@@ -429,7 +429,7 @@ export const trial = {
  * "0. Call Booked" workflow in GHL, so keep this pointing at that calendar.
  */
 export const booking = {
-  url: "https://link.scaalus.com/widget/booking/lQ4WyfczjgRtN3ebnMg9",
+  url: "https://link.scaalus.com/widget/booking/OtNfbfm8egJo1BkLNZet",
   embedScript: "https://link.scaalus.com/js/form_embed.js",
   frameTitle: "Book your free trial call with Scaalus",
   loading: "Loading available times…",
