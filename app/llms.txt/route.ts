@@ -30,9 +30,8 @@ ${included.groups.map((g) => `- ${g.title}: ${g.items.join(", ")}`).join("\n")}
 
 ## Pricing
 - ${pricing.plan.price}${pricing.plan.period}, everything included
-- 7-day free trial on the owner's real leads
+- 30-day money-back guarantee
 - No contract, cancel anytime
-- Satisfaction guarantee
 
 ## FAQ
 ${faq.items.map((f) => `### ${f.q}\n${f.a}`).join("\n\n")}
@@ -41,7 +40,7 @@ ${faq.items.map((f) => `### ${f.q}\n${f.a}`).join("\n\n")}
 - Website: ${site.url}
 - Email: ${site.email}
 - Phone: ${site.phone.display}
-- Start a free trial: ${site.url}/#trial
+- Book a call: ${site.url}/#trial
 `;
 
   return new Response(body, {

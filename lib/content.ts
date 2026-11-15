@@ -32,9 +32,9 @@ export const nav = [
 ] as const;
 
 export const header = {
-  cta: "Start free trial",
-  ctaShort: "Free trial",
-  menuCta: "Start your 7-day free trial",
+  cta: "Book a call",
+  ctaShort: "Book a call",
+  menuCta: "Book a call",
   home: "Scaalus, back to top",
   openMenu: "Open menu",
   closeMenu: "Close menu",
@@ -56,7 +56,7 @@ export const hero = {
   titleHighlight: "booked jobs.",
   titleEnd: " Not a phone full of missed calls.",
   body: "We answer every call and message in seconds, follow up for you, and put the job on your calendar, day or night. Done for you, while you stay on the job.",
-  primaryCta: "Start your 7-day free trial",
+  primaryCta: "Book a call",
   secondaryCta: "See how it works",
   reassurance: ["$297/month", "No contract", "Cancel anytime"],
 } as const;
@@ -285,7 +285,7 @@ export const included = {
   body: "No piecing together tools and agencies. One system, everything included.",
   strip: "Every piece, set up and run for you.",
   stripPrice: "$297/month",
-  stripCta: "Start free trial",
+  stripCta: "Book a call",
   groups: [
     {
       icon: "search",
@@ -326,7 +326,7 @@ export const pricing = {
   eyebrow: "Pricing",
   title: "One simple price.",
   highlight: "simple price.",
-  body: "The whole system, done for you. Try it on your real leads before you pay.",
+  body: "The whole system, done for you. Backed by a 30-day money-back guarantee.",
   plan: {
     name: "Scaalus Growth System",
     price: "$297",
@@ -334,11 +334,10 @@ export const pricing = {
     badge: "Everything included",
     features: [
       "Everything in the system, set up and run for you",
-      "7-day free trial on your real leads",
+      "30-day money-back guarantee",
       "No contract. Cancel anytime",
-      "Satisfaction guarantee",
     ],
-    cta: "Start your 7-day free trial",
+    cta: "Book a call",
   },
   compare: {
     title: "Agencies sell leads. We help you book jobs.",
@@ -363,23 +362,23 @@ export const pricing = {
 
 export const guarantee = {
   eyebrow: "Zero risk",
-  title: "Try it free for 7 days on your real leads.",
-  body: "See the jobs land on your calendar first. Then decide.",
+  title: "30 days to love it, or your money back.",
+  body: "If Scaalus isn't right for you in the first 30 days, we'll refund you.",
   points: [
     {
-      icon: "calendarCheck",
-      title: "7-day free trial",
-      body: "On your real leads.",
+      icon: "shield",
+      title: "30-day money-back guarantee",
+      body: "A full refund if it's not for you.",
     },
     { icon: "unlock", title: "No contract", body: "Cancel anytime." },
     {
-      icon: "shield",
-      title: "Satisfaction guarantee",
-      body: "You're never locked in.",
+      icon: "calendarCheck",
+      title: "Book a call first",
+      body: "See how it works for your business.",
     },
   ] satisfies Card[],
-  cta: "Start your free trial",
-  badge: "7-day free trial · No contract · Satisfaction guarantee · ",
+  cta: "Book a call",
+  badge: "30-day money-back guarantee · No contract · ",
 };
 
 export const faq = {
@@ -398,8 +397,8 @@ export const faq = {
       a: "No. It's $297 a month with no contract, and you can cancel anytime.",
     },
     {
-      q: "How does the free trial work?",
-      a: "You get 7 days free, running on your real leads, so you can see the results for yourself first.",
+      q: "How do I get started?",
+      a: "Book a call. We'll learn about your business, show you how Scaalus would work for you, and set everything up.",
     },
     {
       q: "Who is Scaalus for?",
@@ -411,17 +410,17 @@ export const faq = {
     },
     {
       q: "What if I'm not happy?",
-      a: "Scaalus comes with a satisfaction guarantee. And since there's no contract, you're never locked in.",
+      a: "You're covered by a 30-day money-back guarantee: if Scaalus isn't right for you in the first 30 days, we'll refund you. And since there's no contract, you're never locked in.",
     },
   ],
 };
 
 export const trial = {
-  eyebrow: "7-day free trial",
+  eyebrow: "Book a call",
   title: "Tonight's missed call could be tomorrow's booked job.",
   highlight: "tomorrow's booked job.",
-  body: "Pick a time for a quick call. We'll set up your free trial on your real leads.",
-  points: ["No contract", "Cancel anytime", "Satisfaction guarantee"],
+  body: "Pick a time for a quick call. We'll show you how Scaalus books more jobs for your business.",
+  points: ["No contract", "Cancel anytime", "30-day money-back guarantee"],
 };
 
 /**
@@ -431,11 +430,11 @@ export const trial = {
 export const booking = {
   url: "https://link.scaalus.com/widget/booking/OtNfbfm8egJo1BkLNZet",
   embedScript: "https://link.scaalus.com/js/form_embed.js",
-  frameTitle: "Book your free trial call with Scaalus",
+  frameTitle: "Book a call with Scaalus",
   loading: "Loading available times…",
   fallback: "Calendar not loading?",
   fallbackLink: "Open it in a new tab",
-  dialogTitle: "Start your 7-day free trial",
+  dialogTitle: "Book a call",
   dialogBody: "Pick a time for a quick call, then add your details.",
   close: "Close",
 } as const;
@@ -470,6 +469,6 @@ export const footer = {
 } as const;
 
 export const mobileBar = {
-  note: "7-day free trial",
-  cta: "Start free trial",
+  note: "30-day money-back guarantee",
+  cta: "Book a call",
 } as const;

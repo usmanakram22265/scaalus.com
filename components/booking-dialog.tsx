@@ -6,7 +6,7 @@ import { booking } from "@/lib/content";
 import { BookingCalendar } from "./booking-calendar";
 import { Icon } from "./ui/icons";
 
-/** Every "Start free trial" link on the page points here. */
+/** Every "Book a call" link on the page points here. */
 const TRIGGER = 'a[href="#trial"]';
 
 /**

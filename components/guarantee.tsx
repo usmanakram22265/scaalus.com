@@ -25,7 +25,10 @@ function RotatingBadge() {
           letterSpacing="2.4"
           className="font-mono uppercase"
         >
-          <textPath href="#badge-ring">{guarantee.badge}</textPath>
+          {/* Stretched to exactly one lap of the ring, so it never overlaps. */}
+          <textPath href="#badge-ring" textLength={486} lengthAdjust="spacing">
+            {guarantee.badge}
+          </textPath>
         </text>
       </svg>
       <span className="absolute inset-0 grid place-items-center">

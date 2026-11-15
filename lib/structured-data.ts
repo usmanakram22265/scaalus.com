@@ -72,7 +72,7 @@ export function structuredData() {
           },
           eligibleRegion: { "@type": "Country", name: "United States" },
           description:
-            "7-day free trial on your real leads. No contract, cancel anytime. Satisfaction guarantee.",
+            "30-day money-back guarantee. No contract, cancel anytime.",
           url: `${site.url}/#trial`,
         },
       },
